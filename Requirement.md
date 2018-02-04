@@ -134,3 +134,50 @@
 1. When entering display, create a table of all schools in the comparison list with their details as columns.
 2. Preferable features of a school are Highlighted. (For features that are hard to compare, just leave them.)
 3. User can sort any feature column. (Number: dec/asc order; String: alphabetical order)
+
+
+
+The system shall ask parents questions about their kids' level of study. (选childcare和幼儿园)
+
+
+The system shall ask parents questions about their kids to find childcares centers.
+
+The system shall ask parents about their kids' grade (infat pg n1 n2 k1 k2)
+
+The system shall ask parents about their kids' food preference.
+
+The system shall ask parents about their kids’ preferred second language.
+
+The system shall ask parents about their preference on SPARK certified childcare center.
+
+The system shall ask parents about their kids’ preferred school time.
+
+The system shall ask parents about their preferred scheme type.
+
+The system shall ask parents about their needs of extended operating hours.
+
+The system shall ask parents about their needs of provision of transport.
+
+The system shall ask parents about their needs of ICCP.
+
+The system shall ask parents about their needs of government subsidy.
+
+The system shall ask parents about their needs of GST registration.
+
+The system shall ask parents about their home address to determine nearby childcare centers.
+
+The system shall ask parents about their home postal code to determine nearby childcare centers.
+
+
+
+The system shall ask parents questions about their kids to find kindergartener services.
+
+The system shall ask parents about their kids’ grade.
+
+The system shall ask parents about their preferred program hours.
+
+The system shall ask parents about their kids’ preferred second language.
+
+The system shall ask parents about their home address to determine nearby kindergartener services.
+
+The system shall ask parents about their home postal code to determine nearby  kindergartener services.
