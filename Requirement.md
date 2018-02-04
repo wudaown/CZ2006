@@ -62,3 +62,21 @@
 3. User can sort any feature column. (Number: dec/asc order; String: alphabetical order)
 
 
+###REQUIREMENTS TOWARDS FOLLOWING AND PUSHING SERVICE
+1.	User must be able to select what kind of organisation they want to follow whether child care or kindergarten and so on. 
+2.	User must be able to follow as many kinds of kindergartens or child care services as possible when they are interested in a specific type of kindergarten.
+3.	User must be able to follow a certain type of kindergarten or child care services to receive their relevant data or messages.
+4.	User must be able to unfollow certain kindergarten or child care services when they are not interested in it.
+5.	User must be enabled with the ability of choosing some certain kindergartens or child care services that they have followed to form some certain groups based on users’ need.
+6.	User must be able to give different priorities to different groups.
+7.	User must be able to give different priorities to the members(schools) inside each group.
+8.	User must be able to see the kindergarten’s or child care services’ home page and information after following a specific kindergarten. 
+9.	User must have the choice to choose whether to receive the pushing service or not.
+10.	The pushing service must provide information towards the kindergarten or child care services name, latest information about the kindergarten.
+11. User must be able to select which kind of pushing message they want for each kind of groups they have made before.
+12.	Pushing message must have different tags including messages about new classes, message about new vacancies, messages about new teachers, messages about new teaching plan and so on.
+13.	User must be able to choose what kind of pushing message they want to receive.
+14.	User must be able to receive the information about their followed kindergarten or child care services immediately.
+15.	The application must be able to send pushing message to the user whenever the user is opening the application or not.
+16.	User must be able to see the previous pushing messages up to whatever day they want.
+17.	When different information towards different kindergartens or child care services are received at the same time. The kindergartens or child care services with higher priorities must be given the priority to display the pushing messages following with pushing messages towards lower priority kindergartens or child care services.
