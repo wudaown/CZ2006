@@ -48,3 +48,17 @@
 4. User information should be protected thus eliminate the risk of leaking user information.
 5. The system should be responsive so any action from user will react in under 2 ms in good network condition.
 6. All processing should be done on the server side so not to cause performance issue on user's device.  
+
+## Comparison between schools
+
+###ADD/REMOVE SCHOOLS
+1. User can add schools to a comparison list from School Information Page.
+2. User can remove a school from the table.
+3. User can add a school to Favorite list from the table.
+
+###TABLE DISPLAY
+1. When entering display, create a table of all schools in the comparison list with their details as columns.
+2. Preferable features of a school are Highlighted. (For features that are hard to compare, just leave them.)
+3. User can sort any feature column. (Number: dec/asc order; String: alphabetical order)
+
+
