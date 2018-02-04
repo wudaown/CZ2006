@@ -62,7 +62,7 @@
 3. User can sort any feature column. (Number: dec/asc order; String: alphabetical order)
 
 
-REQUIREMENTS TOWARDS FOLLOWING AND PUSHING SERVICE
+## REQUIREMENTS TOWARDS FOLLOWING AND PUSHING SERVICE
 
 1.	User must be able to select what kind of organisation they want to follow whether child care or kindergarten and so on. 
 2.	User must be able to follow as many kinds of kindergartens or child care services as possible when they are interested in a specific type of kindergarten.
