@@ -28,7 +28,7 @@
 ## Home Page
 ### Functional Requirement
 
-1. User may gain information from the home page.
+1. The home page must pass on introduction of this system, guidance and related news.
 
 	1.1 The home page follows a certain format. 
 
@@ -116,7 +116,90 @@
 
 	5.9	When different information towards different kindergartens or child care services are received at the same time. The kindergartens or child care services with higher priorities must be given the priority to display the pushing messages following with pushing messages towards lower priority kindergartens or child care services.
 
+6. User must be able to choose to be guided to reach his/her wanted schools.
 
+	6.1 The system shall interact with users by asking questions.
+
+		6.1.1 The questions must be easy to understand and not more than 20 words.
+
+		6.1.2 The number of questions shall not exceed 10.
+
+		6.1.3 The questions asked shall be selected from the following perspectives according to its importance and relevance:
+
+			level of study. 
+
+			kids' grade (infat pg n1 n2 k1 k2)
+
+			food preference.
+
+			preferred second language.
+
+			preference on SPARK certified childcare center.
+
+			preferred school time.
+
+			preferred scheme type.
+
+			needs of extended operating hours.
+
+			needs of provision of transport.
+
+			needs of ICCP.
+
+			needs of government subsidy.
+
+			needs of GST registration.
+
+			home address to determine nearby childcare centers.
+
+			home postal code to determine nearby childcare centers.
+
+
+	6.2 User must be guided to the page of school list after the interaction with system. 
+
+7. User must be able to filter the schools in an advanced search.
+
+	7.1 User must be able to submit the filtering information with at least one question answered.
+
+	7.2 User must be able to make their choice from the following perspectives：
+
+		level of study. 
+
+		kids' grade (infat pg n1 n2 k1 k2)
+
+		food preference.
+
+		preferred second language.
+
+		preference on SPARK certified childcare center.
+
+		preferred school time.
+
+		preferred scheme type.
+
+		needs of extended operating hours.
+
+		needs of provision of transport.
+
+		needs of ICCP.
+
+		needs of government subsidy.
+
+		needs of GST registration.
+
+		home address to determine nearby childcare centers.
+
+		home postal code to determine nearby childcare centers.
+
+	7.3 The system shall present a list of qualified schools according to user's submission of advanced search. 
+
+8. User must be able to retrieve details of schools by clicking on school names anywhere in this system.
+
+	8.1 The details of schools include the school information from gov.data.sg.
+
+	8.2 The details of schools include additional courses information from school website if applicable.
+
+	8.3 User must be able to jump to school websites by clicking on the url link presented in the details of schools.
 
 
 
@@ -135,49 +218,3 @@
 2. Preferable features of a school are Highlighted. (For features that are hard to compare, just leave them.)
 3. User can sort any feature column. (Number: dec/asc order; String: alphabetical order)
 
-
-
-The system shall ask parents questions about their kids' level of study. (选childcare和幼儿园)
-
-
-The system shall ask parents questions about their kids to find childcares centers.
-
-The system shall ask parents about their kids' grade (infat pg n1 n2 k1 k2)
-
-The system shall ask parents about their kids' food preference.
-
-The system shall ask parents about their kids’ preferred second language.
-
-The system shall ask parents about their preference on SPARK certified childcare center.
-
-The system shall ask parents about their kids’ preferred school time.
-
-The system shall ask parents about their preferred scheme type.
-
-The system shall ask parents about their needs of extended operating hours.
-
-The system shall ask parents about their needs of provision of transport.
-
-The system shall ask parents about their needs of ICCP.
-
-The system shall ask parents about their needs of government subsidy.
-
-The system shall ask parents about their needs of GST registration.
-
-The system shall ask parents about their home address to determine nearby childcare centers.
-
-The system shall ask parents about their home postal code to determine nearby childcare centers.
-
-
-
-The system shall ask parents questions about their kids to find kindergartener services.
-
-The system shall ask parents about their kids’ grade.
-
-The system shall ask parents about their preferred program hours.
-
-The system shall ask parents about their kids’ preferred second language.
-
-The system shall ask parents about their home address to determine nearby kindergartener services.
-
-The system shall ask parents about their home postal code to determine nearby  kindergartener services.
