@@ -119,3 +119,6 @@ class ForgetPasswordView(View):
 		email = request.POST['email']
 		send_verify_mail(email, 1)
 		return render(request, 'forget.html', {'msg': 'Submission done. Please your email'})
+
+
+
