@@ -1,0 +1,2 @@
+EMAIL_HOST_USER = 'heng0181@e.ntu.edu.sg'
+EMAIL_HOST_PASSWORD = 'Jy098poi09'
