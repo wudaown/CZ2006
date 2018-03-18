@@ -21,25 +21,32 @@ class Language(models.Model):
 class Kindergarten(models.Model):
 	name = models.CharField(max_length=100, null=False, verbose_name="Centre Name")
 	isoperation = models.BooleanField(default=True, verbose_name="Operation Status")
-	type = models.CharField(max_length=50, verbose_name="Kindergarten Type", choices=(('com', 'Commercial'), ('gov','Government')))
+	type = models.CharField(max_length=50, verbose_name="Kindergarten Type")
 	address = models.CharField(max_length=100, null=False, verbose_name='Centre Address')
 	postalcode = models.IntegerField(verbose_name='Postal Code')
 	email = models.EmailField(verbose_name='Centre Email Address')
-	website = models.URLField(verbose_name='Website')
+	website = models.CharField(max_length=100, verbose_name='Website')
 	number = models.IntegerField(verbose_name='Centre Contact Number')
 	facebook = models.CharField(max_length=100, verbose_name="Facebook")
 	capacity = models.IntegerField(verbose_name="Accomodation Capacity")
 	outdoor = models.BooleanField(verbose_name="Provision of outdoor playground/garden")
 	bus = models.BooleanField(verbose_name='Bus Service')
 	sparkCer = models.BooleanField(verbose_name='SPARK Certified')
-	sparkvalidity = models.DateTimeField(verbose_name="SPARK Validity (end)")
-	registrationfee = models.IntegerField(verbose_name='Registration Fees')
-	k2fee = models.IntegerField(verbose_name='Kindergarten Two Fees')
-	k1fee = models.IntegerField(verbose_name='Kindergarten One Fees')
-	nurseryfee = models.IntegerField(verbose_name='Nursery Fees')
-	prenurseryfee = models.IntegerField(verbose_name='Pre-Nursery Fees')
-	playgroupfee = models.IntegerField(verbose_name='Playgroup Fees')
+	sparkvalidity = models.CharField(max_length=100, verbose_name="SPARK Validity (end)")
+	registrationfee = models.CharField(max_length=10, verbose_name='Registration Fees')
+	k2fee = models.CharField(max_length=10, verbose_name='Kindergarten Two Fees')
+	k1fee = models.CharField(max_length=10, verbose_name='Kindergarten One Fees')
+	nurseryfee = models.CharField(max_length=10, verbose_name='Nursery Fees')
+	prenurseryfee = models.CharField(max_length=10, verbose_name='Pre-Nursery Fees')
+	playgroupfee = models.CharField(max_length=10, verbose_name='Playgroup Fees')
 	language = models.ManyToManyField(Language, verbose_name='Language Offered')
+	
+	class Meta:
+		verbose_name = 'Kindergarten'
+		verbose_name_plural = 'Kindergarten'
+	
+	def __str__(self):
+		return self.name
 
 
 class School(models.Model):

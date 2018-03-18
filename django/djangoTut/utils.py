@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
-from schools.models import School
+from schools.models import School, Kindergarten, Language
 from djangoTut.settings import EMAIL_HOST_USER
+from requests_html import HTMLSession
 import random
 import string
 
@@ -64,10 +65,85 @@ def load_schools(filePath):
 	else:
 		pass
 	
+	
 def crawler():
+	session = HTMLSession()
 	baseurl = 'https://www.msf.gov.sg/dfcs/kindergarten/view.aspx?id='
-	num = 1
-	url = baseurl + str(num)
+	lang = Language.objects.all()
+	# chinese = lang[0]
+	# tamil = lang[1]
+	# hindi = lang[2]
+	# malay = lang[3]
+	# arabic = lang[4]
+	for i in range(1, 449):
+		print(i)
+		url = baseurl + str(i)
+		r = session.get(url)
+		a = r.html.find('table', first=True).find('td')[:-1]
+		kinder = Kindergarten()
+		# for i in a[1::2]:
+		a = a[1::2]
+		kinder.name = a[0].text
+		if a[1].text == 'Active':
+			kinder.isoperation = True
+		else:
+			kinder.isoperation = False
+		kinder.type = a[2].text
+		kinder.address = a[3].text
+		kinder.postalcode = a[4].text
+		kinder.email = a[5].text
+		try:
+			kinder.number = int(a[6].text)
+		except ValueError:
+			kinder.number = a[6].text[:8]
+		kinder.website = a[7].text
+		kinder.facebook = a[8].text
+		if a[9].text.isnumeric():
+			kinder.capacity = a[9].text
+		# try:
+		# except ValueError:
+		else:
+			kinder.capacity = int(a[9].text.split(';')[0])
+		if a[10].text == 'Yes':
+			kinder.outdoor = True
+		else:
+			kinder.outdoor = False
+		if a[11].text == 'Yes':
+			kinder.bus = True
+		else:
+			kinder.bus = False
+		if a[12].text == 'Yes':
+			kinder.sparkCer = True
+			kinder.sparkvalidity = a[13].text
+		else:
+			kinder.sparkCer = False
+			kinder.sparkvalidity = 'NULL'
+		a = r.html.find('table.tb_fees')[0].find('td')[1::3]
+		kinder.registrationfee = a[0].text
+		kinder.k2fee = a[1].text
+		kinder.k1fee = a[2].text
+		kinder.nurseryfee = a[3].text
+		kinder.prenurseryfee = a[4].text
+		kinder.playgroupfee = a[5].text
+		a = r.html.find('tr', containing='Second')[0].find('td')[1]
+		b = a.text.split('\n')
+		for i in b:
+			if i != 'No':
+				for l in lang:
+					if i == l.language:
+						kinder.save()
+						kinder.language.add(l)
+		# a = r.html.find('tr', containing='Other Language')[0].find('td')[1]
+		# b = a.text.split('\n')
+		# for i in b:
+		# 	language = language()
+		# 	if i != 'No':
+		# 		language.language = i
+		# 		language.save()
+		
+	kinder.save()
+
+            
 
 # def load_level(filePath):
 # 	file = open(filePath, 'r')

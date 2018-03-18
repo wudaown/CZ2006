@@ -1,7 +1,7 @@
 # _*_ encoding:utf-8 _*_
 
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic.base import View
 from .models import User, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm
@@ -110,6 +110,12 @@ class RegisterView(View):
             error = register_form.errors
             errors = {'name_of_error': error}
             return render(request, 'register.html', errors)
+
+
+class LogoutView(View):
+	def get(self, request):
+		logout(request)
+		return render(request, 'index.html')
 
 
 class ForgetPasswordView(View):
