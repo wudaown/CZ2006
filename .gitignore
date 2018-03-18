@@ -36,16 +36,16 @@ nn_robust_attack/cifar-10-batches-bin
 
 # Virtualenv
 .Python
-.django/[Bb]in
-.django/[Ii]nclude
-.django/[Ll]ib
-.django/[Ll]ib64
-.django/[Ll]ocal
-.django/[Ss]cripts
-.django/pyvenv.cfg
-.django/.venv
-.django/venv/*
-.django/pip-selfcheck.json
-.django/.idea/*
-.django/*.pyc
-.django/*/config.py
+django/[Bb]in
+django/[Ii]nclude
+django/[Ll]ib
+django/[Ll]ib64
+django/[Ll]ocal
+django/[Ss]cripts
+django/pyvenv.cfg
+django/.venv
+django/venv/*
+django/pip-selfcheck.json
+django/.idea/*
+django/*.pyc
+django/*/config.py
