@@ -12,10 +12,11 @@
             <button name="login" type="submit">Login</button>
             {% csrf_token %}
         </form>
-        <form method="post">
+        <!-- <form method="post">
             <button id="logout" name="logout" type="submit">Logout</button>
             {% csrf_token %}
-        </form>
+        </form> -->
+            <a href={% url 'logout' %}>Logout</a>
         </div>
         <a href="{% url 'register' %}">Register</a>
         <a href="{% url 'index' %}">Home Page</a>
