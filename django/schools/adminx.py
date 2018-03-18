@@ -1,6 +1,6 @@
 # from .models import Language, School, Level
 
-from .models import School
+from .models import School, Kindergarten, Language
 import xadmin
 
 
@@ -17,6 +17,9 @@ class SchoolAdmin(object):
 	# fields: attributes that enable for edit
 	# fields = ('centre_name', 'centre_code', 'vacancy')
 
+class KindergartenAdmin(object):
+	list_display = ['name', 'postalcode']
+
 class LevelAdmin(object):
 	list_display = ['level', 'vacancy', 'kindergarten']
 	search_fields = ['level', 'vacancy', 'kindergarten']
@@ -25,5 +28,6 @@ class LevelAdmin(object):
 
 
 xadmin.site.register(School, SchoolAdmin)
-# xadmin.site.register(Language)
+xadmin.site.register(Kindergarten, KindergartenAdmin)
+xadmin.site.register(Language)
 # xadmin.site.register(Level, LevelAdmin)

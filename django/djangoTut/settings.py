@@ -39,10 +39,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'users',
-	'schools',
-	'xadmin',
-	'crispy_forms',
-	'reversion'
+	'schools'
 ]
 
 # Override default user database
