@@ -10,6 +10,13 @@ from schools.models import School
 
 # Create your models here.
 
+class Message(models.Model):
+    from_id = models.OneToOneField('User', on_delete=models.CASCADE)
+    content = models.CharField(max_length=2000)
+
+class MailBox(models.Model):
+    messages = models.ManyToManyField(Message)
+
 
 class User(AbstractUser):
     username = models.CharField(max_length=20, verbose_name='Username', unique=True)
@@ -19,7 +26,7 @@ class User(AbstractUser):
     date_join = models.DateTimeField(default=datetime.now)
     is_active = models.BooleanField(default=False)
     mobile = models.CharField(max_length=8, null=True, blank=True)
-    mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE)
+    mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE,null=True)
     following = models.ManyToManyField(School)
 
     class Meta:
@@ -50,11 +57,3 @@ class EmailVerifyRecord(models.Model):
         verbose_name = 'Verify Email Address'
         verbose_name_plural = verbose_name
 
-
-class MailBox(models.Model):
-    messages = models.ForeignKey(Message,on_delete=models.CASCADE)
-
-
-class Message(models.Model):
-    from_id = models.OneToOneField(User, on_delete=models.SET_NULL)
-    content = models.CharField()
