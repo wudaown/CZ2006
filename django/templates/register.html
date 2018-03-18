@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <meta http-equiv="REFRESH" content="0;url=http://127.0.0.1:8000">
+    {% else %}
+        <form method="post">
+            <ul>
+                <li>
+                    <label>Username</label>
+                    {{ register_form.username }}
+                </li>
+            <!--
+            forms from the view can be use
+            <input type="text" name="uname">
+            -->
+                <li>
+                    <label>Email</label>
+                    {{ register_form.email }}
+                </li>
+                <li>
+                    <label>Password</label>
+                    {{ register_form.password }}
+                </li>
+            <button type="submit">Register</button>
+            </ul>
+            {% csrf_token %}
+        </form>
+        {% for key, value in name_of_error.items %}
+            {{ value }}
+        {% endfor %}
+        {{ msg }}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'index' %}">Home Page</a>
+    {% endif %}
+{% endblock %}
