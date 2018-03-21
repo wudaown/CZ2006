@@ -161,4 +161,14 @@ def checkMailbox(user):
         qs.save()
     return output
 
+def notifyUser(sender, userlist, message):
+    msg = Message.objects.create(from_id=sender.id, content = message)
+    for user in userlist:
+        user.mailbox.objects.add(msg)
+    return
+
+
+
+
+
 
