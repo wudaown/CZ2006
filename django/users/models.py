@@ -10,12 +10,18 @@ from schools.models import School
 
 # Create your models here.
 
+class Message_Mailbox(models.Model):
+    mailbox = models.ForeignKey('MailBox', on_delete=models.CASCADE)
+    message = models.ForeignKey('Message', on_delete=models.CASCADE)
+    viewed = models.BooleanField(default=False)
+
+
 class Message(models.Model):
     from_id = models.OneToOneField('User', on_delete=models.CASCADE)
     content = models.CharField(max_length=2000)
 
 class MailBox(models.Model):
-    messages = models.ManyToManyField(Message)
+    messages = models.ManyToManyField('Message', through=Message_Mailbox)
 
 
 class User(AbstractUser):

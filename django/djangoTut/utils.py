@@ -9,7 +9,7 @@ from users.models import EmailVerifyRecord
 
 
 def active_generator(n):
-	return ''.join(random.choice(string.ascii_uppercase + string.digits, k=n))
+	return ''.join(random.choices(string.ascii_uppercase + string.digits, k=n))
 
 
 def send_verify_mail(email, mail_type=0):
