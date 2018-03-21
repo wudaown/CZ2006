@@ -9,6 +9,10 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import make_password
 from djangoTut.utils import send_verify_mail
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.http import Http404
+from django.template import Context
+from django.template.loader import get_template
 import pdb
 
 
@@ -68,15 +72,12 @@ class LoginView(View):
             # username and password need to be specify
             user = authenticate(username=username, password=passwd)
             if user is not None:
-
                 login(request, user)
+                request.session['member_id'] = username
                 # return HttpResponseRedirect('login.html')
                 # return render(request, 'index.html')
-                # return HttpResponseRedirect('/')
-                # return redirect('/')
-
-                a = checkMailbox(user)
-                return HttpResponseRedirect(reverse('index'))
+                #  a = checkMailbox(user)
+                return HttpResponseRedirect(reverse('user_page'))
             else:
                 msg = {'msg': 'Username or Password Wrong'}
                 return render(request, 'login.html', msg)
@@ -126,6 +127,10 @@ class RegisterView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
+        try:
+            del request.session['member_id']
+        except KeyError:
+            pass
         return render(request, 'index.html')
 
 
@@ -150,6 +155,13 @@ class ForgetPasswordView(View):
         send_verify_mail(email, 1)
         return render(request, 'forget.html', {'msg': 'Submission done. Please your email'})
 
+class UserPageView(View):
+    def get(self, request):
+        return render(request, 'user_page.html')
+
+
+
+
 
 def checkMailbox(user):
     mailbox = user.mailbox
@@ -160,5 +172,29 @@ def checkMailbox(user):
         qs.viewed = True
         qs.save()
     return output
+
+'''def user_page(request):
+    try:
+        user = User.objects.get(username=request.session['member_id'])
+    except:
+        raise Http404('Requested user not found.')
+    bookmarks = user.bookmark_set.all()
+    template = get_template('user_page.html')
+    variables = Context({
+            'username': username,
+            'bookmarks': bookmarks
+    })
+    output = template.render(variables)
+    return HttpResponse(output)'''
+
+def saveToList(request,schoolName):
+	user = User.objects.get(username=request.session['member_id'])
+	if user is not None:
+		school = Kindergarten.objects.get(name=schoolName)
+		user.following.add(school)
+		user.save()
+		return HttpResponse("<script>Save.Response_OK();</script>")
+	else:
+		return render(request, 'login.html')
 
 

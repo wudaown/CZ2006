@@ -1,0 +1,2 @@
+EMAIL_HOST_USER = '111@qq.com'
+EMAIL_HOST_PASSWORD = 'ddsada'
