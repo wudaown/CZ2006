@@ -27,6 +27,7 @@ urlpatterns = [
 	#path('xadmin/', xadmin.site.urls),
 	path('admin/', admin.site.urls),
 	path('users/', include('users.urls'), name='users'),
+	path('schools/', include('schools.urls'), name='schools'),
 	path('active/<slug:active_code>/', ActiveView.as_view(), name='active'),
 	path('reset/<slug:reset_code>/', ResetView.as_view(), name='reset')
 	# path('login/', TemplateView.as_view(template_name='login.html'), name='login')
