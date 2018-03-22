@@ -79,6 +79,8 @@ class LoginView(View):
                 #  a = checkMailbox(user)
                 # return HttpResponseRedirect(reverse('user_page'))
                 # return render(request, 'user_page.html')
+                 a = checkMailbox(user)
+
                 return redirect('/users/'+username)
             else:
                 msg = {'msg': 'Username or Password Wrong'}
@@ -178,6 +180,16 @@ def checkMailbox(user):
         qs.viewed = True
         qs.save()
     return output
+def notifyUser(sender, userlist, message):
+    msg = Message.objects.create(from_id=sender.id, content = message)
+    for user in userlist:
+        user.mailbox.objects.add(msg)
+    return
+
+def getschoolfollower(school):
+    userlist = school.following.all()
+    return userlist
+
 
 '''def user_page(request):
     try:
