@@ -69,12 +69,31 @@ def load_schools(filePath):
 def crawler():
 	session = HTMLSession()
 	baseurl = 'https://www.msf.gov.sg/dfcs/kindergarten/view.aspx?id='
+
 	lang = Language.objects.all()
-	# chinese = lang[0]
-	# tamil = lang[1]
-	# hindi = lang[2]
-	# malay = lang[3]
-	# arabic = lang[4]
+	if lang is  None:
+		chinese = Language()
+		chinese.language = 'Chinese'
+		tamil = Language()
+		tamil.language = 'Tamil'
+		hindi = Language()
+		hindi.language = 'Hindi'
+		malay = Language()
+		malay.language = 'Malay'
+		arabic = Language()
+		arabic.language = 'Arabic'
+		chinese.save()
+		tamil.save()
+		hindi.save()
+		malay.save()
+		arabic.save()
+		lang = []
+		# lang.extend(chinese, malay, hindi, arabic, tamil)
+		lang.append(malay)
+		lang.append(chinese)
+		lang.append(hindi)
+		lang.append(arabic)
+		lang.append(tamil)
 	for i in range(1, 449):
 		print(i)
 		url = baseurl + str(i)
