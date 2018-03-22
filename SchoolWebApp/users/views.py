@@ -9,7 +9,7 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import make_password
 from djangoTut.utils import send_verify_mail
 from django.http import HttpResponse, HttpResponseRedirect
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.http import Http404
 from django.template import Context
 from django.template.loader import get_template
@@ -77,9 +77,7 @@ class LoginView(View):
                 # return HttpResponseRedirect('login.html')
                 # return render(request, 'index.html')
                 #  a = checkMailbox(user)
-                # return HttpResponseRedirect(reverse('user_page'))
-                # return render(request, 'user_page.html')
-                return redirect('/users/'+username)
+                return HttpResponseRedirect(reverse('user_page'))
             else:
                 msg = {'msg': 'Username or Password Wrong'}
                 return render(request, 'login.html', msg)
@@ -103,8 +101,7 @@ class RegisterView(View):
             password = register_form.data['password']
             email = register_form.data['email']
             if User.objects.filter(username=username):
-                return HttpResponseRedirect(reverse('register'))
-                # return render(request, 'register.html', {'msg': 'Username already exists'})
+                return render(request, 'register.html', {'msg': 'Username already exists'})
             user = User()
             # Only if email activation is needed then set is_active false
             user.is_active = False
@@ -159,12 +156,9 @@ class ForgetPasswordView(View):
         return render(request, 'forget.html', {'msg': 'Submission done. Please your email'})
 
 class UserPageView(View):
-    def get(self, request, username):
-        user = User.objects.filter(username=username)
-        if user is not None:
-            return render(request, 'user_page.html')
-        else:
-            return HttpResponse("Wrong username")
+    def get(self, request):
+        return render(request, 'user_page.html')
+
 
 
 
@@ -194,13 +188,13 @@ def checkMailbox(user):
     return HttpResponse(output)'''
 
 def saveToList(request,schoolName):
-    user = User.objects.get(username=request.session['member_id'])
-    if user is not None:
-        school = Kindergarten.objects.get(name=schoolName)
-        user.following.add(school)
-        user.save()
-        return HttpResponse("<script>Save.Response_OK();</script>")
-    else:
-        return render(request, 'login.html')
+	user = User.objects.get(username=request.session['member_id'])
+	if user is not None:
+		school = Kindergarten.objects.get(name=schoolName)
+		user.following.add(school)
+		user.save()
+		return HttpResponse("<script>Save.Response_OK();</script>")
+	else:
+		return render(request, 'login.html')
 
 
