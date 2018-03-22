@@ -76,6 +76,7 @@ class LoginView(View):
                 # return redirect('/')
 
                 a = checkMailbox(user)
+
                 return HttpResponseRedirect(reverse('index'))
             else:
                 msg = {'msg': 'Username or Password Wrong'}
@@ -167,7 +168,9 @@ def notifyUser(sender, userlist, message):
         user.mailbox.objects.add(msg)
     return
 
-
+def getschoolfollower(school):
+    userlist = school.following.all()
+    return userlist
 
 
 

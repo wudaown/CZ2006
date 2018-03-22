@@ -7,7 +7,6 @@ import json
 
 # Create your views here.
 
-
 def school_info(request, centre_code):
     school = School.object.filter(centre_code=centre_code)
     name = school.centre_name
