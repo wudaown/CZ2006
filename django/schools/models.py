@@ -25,7 +25,7 @@ class Kindergarten(models.Model):
 	address = models.CharField(max_length=100, null=False, verbose_name='Centre Address')
 	postalcode = models.IntegerField(verbose_name='Postal Code')
 	email = models.EmailField(verbose_name='Centre Email Address')
-	website = models.CharField(max_length=100, verbose_name='Website')
+	website = models.URLField(max_length=100, verbose_name='Website')
 	number = models.IntegerField(verbose_name='Centre Contact Number')
 	facebook = models.CharField(max_length=100, verbose_name="Facebook")
 	k1_capacity = models.IntegerField(default=0, verbose_name="Accomodation Capacity")
@@ -41,6 +41,7 @@ class Kindergarten(models.Model):
 	prenurseryfee = models.CharField(max_length=10, verbose_name='Pre-Nursery Fees')
 	playgroupfee = models.CharField(max_length=10, verbose_name='Playgroup Fees')
 	language = models.ManyToManyField(Language, verbose_name='Language Offered')
+	#linkedUsers = models.ManyToManyField(User)
 	
 	class Meta:
 		verbose_name = 'Kindergarten'

@@ -1,9 +1,8 @@
 from django.urls import path
-
-from . import views
+from .views import SchoolListView,SchoolDetailView,saveToList
 
 urlpatterns = [
-    path('', views.guild_search, name='school'),
-    # ex: /polls/5/
-    path('advance/', views.advanced_search, name='detail'),
+	path('', SchoolListView.as_view(), name='kindergarten-list'),
+    path('<int:pk>/', SchoolDetailView.as_view(), name='school-detail'),
+    path(r'^(?P<pk>)/$',saveToList,name ='saveToList')
 ]

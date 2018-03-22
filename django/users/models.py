@@ -5,10 +5,15 @@ from datetime import datetime
 import datetime as dt
 from django.contrib.auth.models import AbstractUser
 
-from schools.models import School
+from schools.models import School,Kindergarten
 
 
 # Create your models here.
+
+#class DreamList(models.Model):
+ #   username = models.ForeignKey('User',on_delete=models.CASCADE)
+ #   schoolName = models.ForeignKey('Kindergarten',on_delete=models.CASCADE)
+
 
 class Message_Mailbox(models.Model):
     mailbox = models.ForeignKey('MailBox', on_delete=models.CASCADE)
@@ -33,7 +38,7 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=False)
     mobile = models.CharField(max_length=8, null=True, blank=True)
     mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE,null=True)
-    following = models.ManyToManyField(School)
+    following = models.ManyToManyField(Kindergarten)
 
     class Meta:
         verbose_name = 'Users'
