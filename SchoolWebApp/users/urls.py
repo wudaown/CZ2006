@@ -7,5 +7,5 @@ urlpatterns = [
 	path('logout/', LogoutView.as_view(), name='logout'),
 	path('register/', RegisterView.as_view(), name='register'),
 	path('forget/', ForgetPasswordView.as_view(), name='forget'),
-	path(r'^user/(\w+)/$', UserPageView.as_view(),name='user_page'),
+	path('<slug:username>/', UserPageView.as_view(),name='user_page'),
 ]
