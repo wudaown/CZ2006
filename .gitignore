@@ -49,3 +49,4 @@ django/pip-selfcheck.json
 django/.idea/*
 django/*.pyc
 django/*/config.py
+django/db.sqlite3

@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Bootstrap 实例 - 条纹表格</title>
+   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+   <script src="{% static 'js/jquery.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<form method="post" action = "/schools/">
+    <p><b>Is your child a singaporean?</b></p>
+<input type="text" value = "" name = "singaporean_key">
+    <p><b>Do you need spark certified schools</b></p>
+    <input type="text" value = "" name = "certificate_key">
+    <p><b>How old is your child</b></p>
+    <input type="text" value = "" name = "year_old_key">
+    <p><b>Please enter your postal address</b></p>
+    <input type="text" value = "" name = "post_key">
+    <p><b>What is the maximum distance you can accept(in terms of Km)</b></p>
+    <input type="text" value = "" name = "distance_key">
+    <p><b>Please indicate what is the price of the school you want(Please indicate the range in terms of SGD)</b></p>
+    <input type="text" value = "" name = "price_key">
+    <p><b>What is your desired second language</b></p>
+    <input type="text" value = "" name = "second_language_key">
+   <input type="submit" value="submit">
+       {% csrf_token %}
+
+</form>
+
+
+
+<table class="table table-striped">
+   <caption>用户列表</caption>
+   <thead>
+      <tr>
+         <th>school name</th>
+         <th>address</th>
+         <th>facebook</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for user in user_list %}
+      <tr>
+         <td>{{ user.name }}</td>
+         <td>{{ user.address }}</td>
+         <td>{{ user.facebook }}</td>
+{#         <td>{{ user.last_name }}</td>#}
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
+</body>
+</html>
