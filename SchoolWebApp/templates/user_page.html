@@ -5,12 +5,11 @@
     <title>"User Page Test"</title>
 </head>
 <body>
+        {{ username }}
         {% if request.user.is_authenticated %}
             <h1>Login</h1>
         {% else %}
             <h1>not login</h1>
         {% endif %}
-    {% csrf_token %}
-
 </body>
 </html>

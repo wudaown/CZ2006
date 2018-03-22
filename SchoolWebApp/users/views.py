@@ -162,7 +162,7 @@ class UserPageView(View):
     def get(self, request, username):
         user = User.objects.filter(username=username)
         if user is not None:
-            return render(request, 'user_page.html')
+            return render(request, 'user_page.html', {'username' : username})
         else:
             return HttpResponse("Wrong username")
 
@@ -193,10 +193,10 @@ def checkMailbox(user):
     output = template.render(variables)
     return HttpResponse(output)'''
 
-def saveToList(request,schoolName):
+def saveToList(request,id):
     user = User.objects.get(username=request.session['member_id'])
     if user is not None:
-        school = Kindergarten.objects.get(name=schoolName)
+        school = Kindergarten.objects.get(id = id)
         user.following.add(school)
         user.save()
         return HttpResponse("<script>Save.Response_OK();</script>")
