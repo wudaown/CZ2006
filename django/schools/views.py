@@ -12,7 +12,6 @@ from django.http import Http404
 
 # todo: a detailView and a ListView with paging
 import urllib.request
-
 import json
 import re
 
@@ -50,6 +49,8 @@ def guild_search(request):
         p_second = request.POST.get('second_language_key')
         # print(p_second)
         kindergarten = Kindergarten.objects.all()
+
+        k2=False
         if p_sg.upper() == 'YES' or p_sg.upper == 'Y':
             kindergarten = selecetMOE(kindergarten)
         if int(p_year) <= 6 or int(p_year) >= 5:
