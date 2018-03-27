@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import CompareList
+from users.models import CompareList
 from users.models import User
 from schools.models import Kindergarten
 

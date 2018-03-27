@@ -4,9 +4,8 @@ from django.db import models
 from datetime import datetime
 import datetime as dt
 from django.contrib.auth.models import AbstractUser
-
 from schools.models import Kindergarten
-
+#from compare.models import CompareList
 
 # Create your models here.
 
@@ -28,6 +27,9 @@ class Message(models.Model):
 class MailBox(models.Model):
     messages = models.ManyToManyField('Message', through=Message_Mailbox)
 
+class CompareList(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    school = models.ForeignKey('schools.Kindergarten', on_delete=models.CASCADE)
 
 class User(AbstractUser):
     username = models.CharField(max_length=20, verbose_name='Username', unique=True)
@@ -38,8 +40,8 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=False)
     mobile = models.CharField(max_length=8, null=True, blank=True)
     mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE,null=True)
-    following = models.ManyToManyField(Kindergarten)
-    compare_schools=models.ManyToManyField(Kindergarten, through='CompareList')
+    following = models.ManyToManyField(Kindergarten, related_name='following_kd')
+    compare_schools=models.ManyToManyField(Kindergarten, related_name='compare_kd',through='CompareList')
 
     class Meta:
         verbose_name = 'Users'
