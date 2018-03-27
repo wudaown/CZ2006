@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Search by Guidance</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="node_modules/font-awesome-4.7.0/css/font-awesome.min.css">
+		<style>
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 30px;
+			}
+			.modal-footer{
+				background-color: #f9f9f9;
+				}
+/*
+			.row{
+				padding: 10vh 0;
+			}
+*/
+			.row{
+				margin: 5vw;
+			}
+			.header{
+				padding:15vh 0 5vh 0;
+				text-align: center;	
+			}
+			h1{
+				font-size: 28px;
+				font-weight: normal;
+				color: #CA1632;
+				margin: auto;
+			}
+			.card{
+				width: 60vw;
+				min-width: 300px;
+				height: 100%;
+				margin: auto;
+				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			}
+			.btn{
+				margin-right: 5px;
+			}
+			input{
+				margin-bottom: 20px;
+			}
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown" style="padding-right: 15px;">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+							<a class="dropdown-item" href="search_by_details.html">By school details</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<button type="button" class="btn btn-link px-0 nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-circle-o">&nbsp;</i>Login</button>	
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- Login Modal -->
+		<div class="modal fade" id="loginModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 20px;">
+						<h6>Login to your account</h6>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" style="padding: 30px 40px;">
+						<form role="form">
+							<div class="form-group">
+								<lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+								<input type="text" class="form-control" id="usrname" placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+								<input type="text" class="form-control" id="psw" placeholder="Enter password">
+							</div>
+							<div class="custom-checkbox">
+								<label><input type="checkbox" value="" checked>&nbsp;Remember me</label>
+							</div>
+							<button type="submit" class="btn btn-info btn-block">Login</button>
+						</form>
+					</div>
+				  <div class="modal-footer" >
+						<p class="text-right">Not a member? <a href="#">Sign Up</a><br/>
+					  		Forgot your password? <a href="#">Find Password</a>
+					 	</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Body -->
+		<div class="container-fluid">
+			<div class="row">
+				<h1 class="header">Search by guidance</h1>
+			</div>
+			<div class="row">
+				<div class="col">
+				  <div class="card border-light">
+						<div class="card-body" id="qn1">
+							<h5 class="card-title">Question 1/7</h5>
+							<p class="card-text" id="question">Is your child a Singaporean?</p>
+							<input type="button" value="Yes" class="btn btn-outline-danger" onClick="qn1()">
+							<input type="button" value="No" class="btn btn-outline-danger" onClick="qn1()">
+						</div>
+						<div class="card-body" id="qn2" style="display: none">
+							<h5 class="card-title">Question 2/7</h5>
+							<p class="card-text">Do you prefer spark certified schools?</p>
+							<input type="button" value="Yes" class="btn btn-outline-danger" onClick="qn2()">
+							<input type="button" value="No" class="btn btn-outline-danger" onClick="qn2()">
+						</div>
+						<div class="card-body" id="qn3" style="display: none">
+							<h5 class="card-title">Question 3/7</h5>
+							<p class="card-text">How old is your child?</p>
+							<div class="input-group my-4">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="age">Age</label>
+								</div>
+								<select class="custom-select" id="ageSelector">
+									<option selected>Choose...</option>
+									<option value="1">&le;1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+								</select>
+							</div>
+							<button type="button" class="btn btn-outline-danger" onClick="qn3()">Next</button>
+						</div>
+						<div class="card-body" id="qn4" style="display: none">
+							<h5 class="card-title">Question 4/7</h5>
+							<p class="card-text">Where do you live? Please enter your postal code:</p>
+							<input type="text" class="form-control">
+							<button type="button" class="btn btn-outline-danger" onClick="qn4()">Next</button>
+						</div>
+						<div class="card-body" id="qn5" style="display: none">
+							<h5 class="card-title">Question 5/7</h5>
+							<p class="card-text">What is the maximum distance you can accept?</p>
+							<div class="input-group my-4">
+								<select class="custom-select" id="distanceSelector">
+									<option selected>Choose...</option>
+									<option value="2">&le;2</option>
+									<option value="5">5</option>
+									<option value="10">10</option>
+									<option value="15">15</option>
+									<option value="20">20</option>
+									<option value="20+">&ge;20</option>
+								</select>
+								<div class="input-group-append">
+									<label class="input-group-text" for="fee">km</label>
+								</div>
+							</div>
+							<button type="button" class="btn btn-outline-danger" onClick="qn5()">Next</button>
+						</div>
+					  	<div class="card-body" id="qn6" style="display: none">
+							<h5 class="card-title">Question 6/7</h5>
+							<p class="card-text">How much tuition fee would you accept?</p>
+							<div class="input-group my-4">
+								<select class="custom-select" id="feeSelector">
+									<option selected>Choose...</option>
+									<option value="1000">&lt;1000</option>
+									<option value="1500">1000-1500</option>
+									<option value="2000">1500-2000</option>
+									<option value="2500">2000-2500</option>
+									<option value="3000">2500-3000</option>
+									<option value="3000+">&ge;3000</option>
+								</select>
+								<div class="input-group-append">
+									<label class="input-group-text" for="fee">SGD/Year</label>
+								</div>
+							</div>
+							<button type="button" class="btn btn-outline-danger" onClick="qn6()">Next</button>
+						</div>
+					  	<div class="card-body" id="qn7" style="display: none">
+							<h5 class="card-title">Question 7/7</h5>
+							<p class="card-text">What is your desired secondary language?</p>
+							<div class="input-group my-4">
+								<select class="custom-select" id="languageSelector">
+									<option selected>Choose...</option>
+									<option value="cn">Chinese</option>
+									<option value="my">Malay</option>
+									<option value="tm">Tamil</option>
+									<option value="hcn">Higher Chinese</option>
+									<option value="hmy">Higher Malay</option>
+									<option value="htm">Higher Tamil</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-outline-danger" onClick="qn7()">Submit</button>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+		
+	<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			&copy; 2018 TEAM UNDEFINED
+		</div>
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		
+	<script>
+			function qn1(){
+				document.getElementById("qn1").style.display = "none";
+				document.getElementById("qn2").style.display = "initial";
+			}
+			function qn2(){
+				document.getElementById("qn2").style.display = "none";
+				document.getElementById("qn3").style.display = "initial";
+			}
+			function qn3(){
+				document.getElementById("qn3").style.display = "none";
+				document.getElementById("qn4").style.display = "initial";
+			}
+			function qn4(){
+				document.getElementById("qn4").style.display = "none";
+				document.getElementById("qn5").style.display = "initial";
+			}
+			function qn5(){
+				document.getElementById("qn5").style.display = "none";
+				document.getElementById("qn6").style.display = "initial";
+			}
+			function qn6(){
+				document.getElementById("qn6").style.display = "none";
+				document.getElementById("qn7").style.display = "initial";
+			}
+		</script>
+
+</body>
+</html>
