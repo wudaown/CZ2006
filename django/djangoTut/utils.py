@@ -7,7 +7,6 @@ import string
 
 from users.models import EmailVerifyRecord
 
-
 def active_generator(n):
 	return ''.join(random.choices(string.ascii_uppercase + string.digits, k=n))
 
