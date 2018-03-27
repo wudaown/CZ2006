@@ -9,14 +9,6 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import make_password
 from djangoTut.utils import send_verify_mail
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic.list import ListView
-from django.utils import timezone
-# from django.contrib.auth.models import User
-from django.http import Http404
-from django.template import Context
-from django.template.loader import get_template
-import pdb
-
 
 
 # Create your views here.
@@ -63,15 +55,13 @@ class ResetView(View):
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'login.html')
+        return render(request, 'index.html')
 
     def post(self, request):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             username = request.POST['uname']
             passwd = request.POST['passwd']
-            # passwd = request.POST.get('passwd')
-
             # username and password need to be specify
             user = authenticate(username=username, password=passwd)
             if user is not None:
@@ -81,20 +71,20 @@ class LoginView(View):
                 # return HttpResponseRedirect('login.html')
                 # return render(request, 'index.html')
                 #  a = checkMailbox(user)
-                # return HttpResponseRedirect(reverse('user_page'))
                 # return render(request, 'user_page.html')
-                a = checkMailbox(user)
+                # a = checkMailbox(user)
 
-                return redirect('/users/' + username)
+                return HttpResponseRedirect(reverse('index'))
+                # return redirect('/users/' + username)
             else:
                 msg = {'msg': 'Username or Password Wrong'}
-                return render(request, 'login.html', msg)
+                return render(request, 'index.html', msg)
         else:
             error = login_form.errors
             errors = {'name_of_error': error}
             # To pass the parameter into html
             # the key inside the dict is use
-            return render(request, 'login.html', errors)
+            return render(request, 'index.html', errors)
 
 
 class RegisterView(View):
@@ -140,7 +130,8 @@ class LogoutView(View):
             del request.session['member_id']
         except KeyError:
             pass
-        return render(request, 'index.html')
+        return HttpResponseRedirect(reverse('index'))
+        # return render(request, 'index.html')
 
 
 class NotificationCenterView(View):
