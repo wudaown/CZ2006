@@ -30,7 +30,7 @@
   <tbody>
     {% for k in kindergarten %}
       <tr >
-          <td><a href="{% url 'school-detail' k.pk %}">{{ k.name }}</a></td>
+          <td><a href="{% url 'kindergarten-detail' k.pk %}">{{ k.name }}</a></td>
         <td>{{ k.email }}</td>
       </tr>
     {% endfor %}

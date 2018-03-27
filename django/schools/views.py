@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import View
 from .models import Kindergarten
-from django.utils import timezone
 from users.models import User
 from django.http import Http404
 # Create your views here.
@@ -12,10 +11,6 @@ from django.http import Http404
 import urllib.request
 import json
 import re
-
-
-def guild_search(request):
-    return render(request, 'search_by_guidance.html')
 
 def advanced_search(request):
 	if request.method == 'GET':
@@ -27,78 +22,81 @@ def advanced_search(request):
 
 
 def guild_search(request):
-    if request.method == 'GET':
-        return render(request, 'table.html')
-    if request.method == 'POST':
-        p_sg = request.POST.get('singaporean_key')
-        p_certificate = request.POST.get('certificate_key')
-        p_year = request.POST.get('year_old_key')
-        p_post = request.POST.get('post_key')
-        p_dis = request.POST.get('distance_key')
-        p_price = request.POST.get('price_key')
-        p_second = request.POST.get('second_language_key')
-        kindergarten = Kindergarten.objects.all()
+	if request.method == 'GET':
+		return render(request, 'table.html')
+	if request.method == 'POST':
+		p_sg = request.POST.get('singaporean_key')
+		p_certificate = request.POST.get('certificate_key')
+		p_year = request.POST.get('year_old_key')
+		p_post = request.POST.get('post_key')
+		p_dis = request.POST.get('distance_key')
+		p_price = request.POST.get('price_key')
+		p_second = request.POST.get('second_language_key')
+		kindergarten = Kindergarten.objects.all()
+		
+		k2 = False
+		if p_sg.upper() == 'YES' or p_sg.upper == 'Y':
+			kindergarten = selecetMOE(kindergarten)
+		if int(p_year) <= 6 or int(p_year) >= 5:
+			k2 = True
+		kindergarten = year_kindergarten(k2, kindergarten)
+		if p_certificate.upper() == 'YES' or p_certificate.upper() == 'Y':
+			kindergarten = selecetSPARK(kindergarten)
+		kindergarten = price_select(str(p_price), kindergarten, k2)
+		kindergarten = language_select(p_second, kindergarten)
+		print(kindergarten)
+		return render(request, 'table.html', {'user_list': kindergarten})
 
-        k2=False
-        if p_sg.upper() == 'YES' or p_sg.upper == 'Y':
-            kindergarten = selecetMOE(kindergarten)
-        if int(p_year) <= 6 or int(p_year) >= 5:
-            k2 = True
-        kindergarten = year_kindergarten(k2, kindergarten)
-        if p_certificate.upper() == 'YES' or p_certificate.upper() == 'Y':
-            kindergarten = selecetSPARK(kindergarten)
-        kindergarten = price_select(str(p_price), kindergarten, k2)
-        kindergarten = language_select(p_second, kindergarten)
-        print(kindergarten)
-        return render(request, 'table.html', {'user_list':kindergarten})
 
 def language_select(p_second, collection):
-    if p_second == 'cn':
-        target_kind = collection.filter(language='Chinese')
-    if p_second == 'my':
-        target_kind = collection.filter(language='Malay')
-    if p_second == 'tm':
-        target_kind = collection.filter(language='Tamil')
-    return target_kind
+	if p_second == 'cn':
+		target_kind = collection.filter(language='Chinese')
+	if p_second == 'my':
+		target_kind = collection.filter(language='Malay')
+	if p_second == 'tm':
+		target_kind = collection.filter(language='Tamil')
+	return target_kind
+
 
 def price_select(price, collection, k2):
-    #todo
-    int_p = int(price)
-    if int_p == 1000:
-        if k2:
-            target_kind = collection.filter(k2fee__lte=1000)
-        else:
-            target_kind = collection.filter(k1fee__lte=1000)
-    elif int_p == 1500:
-        if k2:
-            target_kind = collection.filter(k2fee__gte=1000, k2_fee__lte=1500)
-        else:
-            target_kind =collection.filter(k1fee__gte=1000, k1_fee__lte=1500)
-    elif int_p == 2000:
-        if k2:
-            target_kind = collection.filter(k2fee__gte=1500, k2_fee__lte=2000)
-        else:
-            target_kind =collection.filter(k1fee__gte=1500, k1_fee__lte=2000)
-    elif int_p == 2500:
-        if k2:
-            target_kind = collection.filter(k2fee__gte=2000, k2_fee__lte=2500)
-        else:
-            target_kind = collection.filter(k1fee__gte=2000, k1_fee__lte=2500)
-    elif int_p == 3000:
-        if k2:
-            target_kind = collection.filter(k2fee__gte=2500, k2_fee__lte=3000)
-        else:
-            target_kind = collection.filter(k1fee__gte=2500, k1_fee__lte=3000)
-    else:
-        if k2:
-            target_kind = collection.filter(k2fee__gte=3000)
-        else:
-            target_kind = collection.filter(k1fee__gte=3000)
-    # if k2:
-    #     target_kind = collection.filter(k2fee__gte=lower, k2fee__lte=upper)
-    # else:
-    #     target_kind = collection.filter(k1fee__gte=lower, k1fee__lte=upper)
-    return target_kind
+	# todo
+	int_p = int(price)
+	if int_p == 1000:
+		if k2:
+			target_kind = collection.filter(k2fee__lte=1000)
+		else:
+			target_kind = collection.filter(k1fee__lte=1000)
+	elif int_p == 1500:
+		if k2:
+			target_kind = collection.filter(k2fee__gte=1000, k2_fee__lte=1500)
+		else:
+			target_kind = collection.filter(k1fee__gte=1000, k1_fee__lte=1500)
+	elif int_p == 2000:
+		if k2:
+			target_kind = collection.filter(k2fee__gte=1500, k2_fee__lte=2000)
+		else:
+			target_kind = collection.filter(k1fee__gte=1500, k1_fee__lte=2000)
+	elif int_p == 2500:
+		if k2:
+			target_kind = collection.filter(k2fee__gte=2000, k2_fee__lte=2500)
+		else:
+			target_kind = collection.filter(k1fee__gte=2000, k1_fee__lte=2500)
+	elif int_p == 3000:
+		if k2:
+			target_kind = collection.filter(k2fee__gte=2500, k2_fee__lte=3000)
+		else:
+			target_kind = collection.filter(k1fee__gte=2500, k1_fee__lte=3000)
+	else:
+		if k2:
+			target_kind = collection.filter(k2fee__gte=3000)
+		else:
+			target_kind = collection.filter(k1fee__gte=3000)
+	# if k2:
+	#     target_kind = collection.filter(k2fee__gte=lower, k2fee__lte=upper)
+	# else:
+	#     target_kind = collection.filter(k1fee__gte=lower, k1fee__lte=upper)
+	return target_kind
+
 
 def selecetMOE(collection):
 	# target_kind = collection.filter(MOE == True)
@@ -135,13 +133,13 @@ def distant_selection(target_distant, zip, collection):
 
 
 def calculatedistance(zip_home, zip_school):
-    query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
-    query = query.replace("home", str(zip_home))
-    query = query.replace("school", str(zip_school))
-    with urllib.request.urlopen(query) as url:
-        data = json.loads(url.read().decode())
-        dist = data['routes'][0]['legs'][0]['distance']['value']
-        return dist
+	query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
+	query = query.replace("home", str(zip_home))
+	query = query.replace("school", str(zip_school))
+	with urllib.request.urlopen(query) as url:
+		data = json.loads(url.read().decode())
+		dist = data['routes'][0]['legs'][0]['distance']['value']
+		return dist
 
 
 def results(request, question_id):
@@ -162,7 +160,6 @@ def fuzzy_filter(user_input, collection):
 		if match:
 			suggestions.append(item)
 	return suggestions
-
 
 
 class SchoolListView(View):
@@ -192,31 +189,32 @@ class SchoolDetailView(View):
 		return render(request, 'school_detail.html', context)
 
 
-def saveToList(request,pk):
-    try:
-        user = User.objects.get(username=request.session['member_id'])
-    except:
-        #print('here')
-        return render(request, 'login.html')
-    school = Kindergarten.objects.get(id = pk)
-    if school in user.following.all():
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-    else:
-        user.following.add(school)
-        user.save()
-    #print('ok')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+def saveToList(request, pk):
+	try:
+		user = User.objects.get(username=request.session['member_id'])
+	except:
+		# print('here')
+		return render(request, 'login.html')
+	school = Kindergarten.objects.get(id=pk)
+	if school in user.following.all():
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+	else:
+		user.following.add(school)
+		user.save()
+		# print('ok')
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
-def deleteFromList(request,pk):
-    try:
-        user = User.objects.get(username=request.session['member_id'])
-    except:
-        #print('here')
-        return render(request, 'login.html')
-    school = Kindergarten.objects.get(id = pk)
-    if school in user.following.all():
-        user.following.remove(school)
-        user.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-    else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def deleteFromList(request, pk):
+	try:
+		user = User.objects.get(username=request.session['member_id'])
+	except:
+		# print('here')
+		return render(request, 'login.html')
+	school = Kindergarten.objects.get(id=pk)
+	if school in user.following.all():
+		user.following.remove(school)
+		user.save()
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+	else:
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

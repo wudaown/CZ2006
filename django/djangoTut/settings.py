@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 	'users',
 	'schools',
 	'compare',
-'reset_migrations',
 ]
 
 # Override default user database
@@ -132,7 +131,7 @@ STATIC_URL = '/static/'
 ## STATIC ROOT
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'templates/static')
+	os.path.join(BASE_DIR, 'templates/static', 'templates/static/images')
 ]
 
 
