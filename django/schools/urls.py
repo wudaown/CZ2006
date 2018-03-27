@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import SchoolListView, SchoolDetailView, saveToList, guild_search, advanced_search, deleteFromList
+from .views import SchoolListView, SchoolDetailView, saveToList, guided_search, advanced_search, deleteFromList
 
 urlpatterns = [
-	path('guide_search/', guild_search, name='school'),
+	path('guide_search/', guided_search, name='school'),
 
 	# ex: /polls/5/
 	path('advance/', advanced_search, name='detail'),
