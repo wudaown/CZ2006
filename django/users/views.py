@@ -132,7 +132,7 @@ class LogoutView(View):
 
 class NotificationCenterView(View):
     # TODO how to know who is the user
-    def get(self, request ,user):
+    def get(self, request, user):
         output = set()
         messages = Message_Mailbox.objects.filter(mailbox_id = user.mailbox_id)
         for qs in messages:
