@@ -107,12 +107,13 @@ def distant_selection(target_distant, zip, collection):
 
 def calculatedistance(zip_home, zip_school):
     query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
-    query.replace("home", str(zip_home))
-    query.replace("school", str(zip_school))
+    query = query.replace("home", str(zip_home))
+    query = query.replace("school", str(zip_school))
     with urllib.request.urlopen(query) as url:
         data = json.loads(url.read().decode())
         dist = data['routes'][0]['legs'][0]['distance']['value']
         return dist
+
 
 # def send(request):
 #         p = Publisher(name='Apress', city='Berkeley')
