@@ -8,6 +8,7 @@
         {{ username }}
         {% if request.user.is_authenticated %}
             <h1>Login</h1>
+            {{ followingList }}
         {% else %}
             <h1>not login</h1>
         {% endif %}

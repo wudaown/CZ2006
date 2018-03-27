@@ -4,3 +4,8 @@
 <p>Email: {{ object.email }}</p>
 <p>Website: {{ object.website }}</p>
 <p>Type: {{ type }}</p>
+{% if user in object.user_set.all %}
+<a href="{% url 'deleteFromList' object.id%}">click to unsave!</a>
+{% else %}
+<a href="{% url 'saveToList' object.id%}">click to save this school!</a>
+{% endif%}

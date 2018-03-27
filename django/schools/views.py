@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from .models import School, Kindergarten
 from django.utils import timezone
 from users.models import User
-
+from django.http import Http404
 # Create your views here.
 
 # todo: a detailView and a ListView with paging
@@ -151,10 +151,33 @@ class SchoolListView(ListView):
 class SchoolDetailView(DetailView):
 
     model = Kindergarten
-    def get_context_data(self, **kwargs):
+    def school_detail_view(self,request,pk):
+        try:
+            school_id = Kindergarten.objects.get(pk=pk)
+        except Kindergarten.DoesNotExist:
+            raise Http404("Kindergarten does not exist")
+
+            # book_id=get_object_or_404(Book, pk=pk)
+        if User.objects.get(username=request.session['member_id']) is not None:
+            user = User.objects.get(username=request.session['member_id'])
+
+            return render(
+                request,
+                'school-detail',
+                context={'kindergarten': school_id, 'user ':user,}
+            )
+        else:
+            return render(
+                request,
+                'school-detail',
+                context={'kindergarten': school_id, 'user ': None, }
+            )
+
+'''    def get_context_data(self,  **kwargs):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+        '''
 
 def saveToList(request,pk):
     try:
@@ -163,7 +186,24 @@ def saveToList(request,pk):
         #print('here')
         return render(request, 'login.html')
     school = Kindergarten.objects.get(id = pk)
-    user.following.add(school)
-    user.save()
+    if school in user.following.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        user.following.add(school)
+        user.save()
     #print('ok')
-    return HttpResponse("<script>Save.Response_OK();</script>")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def deleteFromList(request,pk):
+    try:
+        user = User.objects.get(username=request.session['member_id'])
+    except:
+        #print('here')
+        return render(request, 'login.html')
+    school = Kindergarten.objects.get(id = pk)
+    if school in user.following.all():
+        user.following.remove(school)
+        user.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
