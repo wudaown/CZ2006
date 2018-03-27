@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Kindergarten
+from .models import Kindergarten, Language
 
 
 # Register your models here.
@@ -29,7 +29,7 @@ class KindergartenAdmin(admin.ModelAdmin):
 
 
 # admin_site = GlobalSetting(name="myadmin")
-# admin.site.register(Language)
+admin.site.register(Language)
 # admin.site.register(School, SchoolAdmin)
 admin.site.register(Kindergarten, KindergartenAdmin)
 

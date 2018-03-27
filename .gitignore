@@ -50,3 +50,9 @@ django/.idea/*
 django/*.pyc
 django/*/config.py
 django/db.sqlite3
+*.sqlite3
+django/db.sqlite3
+.DS_Store
+*.sqlite3
+django/schools/migrations/0002_auto_20180327_0543.py
+django/db.sqlite3

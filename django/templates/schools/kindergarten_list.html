@@ -1,0 +1,8 @@
+<h1>Schools</h1>
+<ul>
+{% for school in object_list %}
+    <li>{{ school.name}} - {{ school.address }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
