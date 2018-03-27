@@ -7,7 +7,7 @@
 <body>
         {{ username }}
         {% if request.user.is_authenticated %}
-            <h1>Login</h1>
+            <h1>Your watchlist:</h1>
             {{ followingList }}
         {% else %}
             <h1>not login</h1>

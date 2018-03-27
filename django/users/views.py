@@ -168,8 +168,9 @@ class UserPageView(View):
     def get(self, request, username):
         user = User.objects.get(username=username)
         output = checkMailbox(user,isviewed=True)
+        flist = user.following.all()
         if user is not None:
-            return render(request, 'user_page.html', {'username': username},{'message_list':output},)
+            return render(request, 'user_page.html', {'username': username,'message_list':output,'followingList':flist,})
         else:
             return HttpResponse("Wrong username")
 
