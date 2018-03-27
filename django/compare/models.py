@@ -1,10 +1,10 @@
 from django.db import models
 from users.models import User
-from schools.models import School
+from schools.models import Kindergarten
 
 class CompareList(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    school = models.ForeignKey('School', on_delete=models.CASCADE)
+    school = models.ForeignKey('Kindergarten', on_delete=models.CASCADE)
 
     #rank_type = models.IntegerField()
 

@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import CompareList
 from users.models import User
-from schools.models import School
+from schools.models import Kindergarten
 
-def index(request):
-    result(request,'data')
+# def index(request):
+#     result(request,'data')
 
 def add(request,u,s):
     #cl=CompareList.objects.Create(user=u,school=s)
-    if type(u)==User and type(s)==School and u and s: # not blank
+    if type(u)==User and type(s)==Kindergarten and u and s: # not blank
         relation=CompareList(user=u,school=s)
         relation.save()
         return HttpResponse('add to compare list succeeded.')

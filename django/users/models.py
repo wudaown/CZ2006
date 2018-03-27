@@ -5,7 +5,7 @@ from datetime import datetime
 import datetime as dt
 from django.contrib.auth.models import AbstractUser
 
-from schools.models import School,Kindergarten
+from schools.models import Kindergarten
 
 
 # Create your models here.
@@ -39,7 +39,7 @@ class User(AbstractUser):
     mobile = models.CharField(max_length=8, null=True, blank=True)
     mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE,null=True)
     following = models.ManyToManyField(Kindergarten)
-    compare_schools=models.ManyToManyField(School, through='CompareList')
+    compare_schools=models.ManyToManyField(Kindergarten, through='CompareList')
 
     class Meta:
         verbose_name = 'Users'
