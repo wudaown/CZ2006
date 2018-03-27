@@ -52,3 +52,5 @@ django/*/config.py
 django/db.sqlite3
 *.sqlite3
 django/db.sqlite3
+django/users/migrations/00*.py
+django/schools/migrations/00*.py
