@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'users',
 	'schools',
 	'compare',
+'reset_migrations',
 ]
 
 # Override default user database

@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+
 from schools.models import School, Kindergarten, Language
 from djangoTut.settings import EMAIL_HOST_USER
 from requests_html import HTMLSession
