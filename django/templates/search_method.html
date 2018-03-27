@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block style %}
+		<style>
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 30px;
+			}
+			.modal-footer{
+				background-color: #f9f9f9;
+				}
+			.row{
+				margin: 5vw;
+			}
+			.header{
+				padding:15vh 0 5vh 0;
+				text-align: center;	
+			}
+			h1{
+				font-size: 36px;
+				font-weight: normal;
+				color: #CA1632;
+				margin: auto;
+			}
+			@media(max-width:576px){
+				h1{
+					font-size:32px;
+				}
+			}	
+			.card{
+				width: 35vw;
+				min-width: 300px;
+				height: 100%;
+				margin: auto;
+				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			}
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+{% endblock %}
+{% block searchMethod %}
+		<!-- Body -->
+		<div class="container-fluid">
+			<div class="row">
+				<h1 class="header">Please choose the search method:</h1>
+			</div>
+			<div class="row">
+				<div class="col-md-6 py-3">
+					<div class="card border-light">
+						<div class="card-body">
+							<h5 class="card-title">Method 1</h5>
+							<p class="card-text">Answer some questions to get recommendation of schools</p>
+							<a href="search_by_guidance.html" class="btn btn-outline-danger btn-lg">Search by guidance</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 py-3">
+					<div class="card border-light">
+						<div class="card-body">
+							<h5 class="card-title">Method 2</h5>
+							<p class="card-text">Use detail information (e.g. name, location, etc.) to filter schools.</p>
+							<a href="search_by_details.html" class="btn btn-outline-danger btn-lg">Search by details</a>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+{% endblock %}

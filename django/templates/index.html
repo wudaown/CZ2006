@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+        {% block style %}
+		<style>
+			html {
+			  height: 100%;
+			  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+				height: 100%;
+				{#background: url('{% static "images/bg.jpg" %}') no-repeat center center fixed /cover;#}
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				background-size: cover;
+				-o-background-size: cover;
+				position: relative;
+				margin: 0;
+				padding-bottom: 6rem;
+				min-height: 100%;
+			}
+			body::before{
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+				background-attachment: fixed;
+				opacity: .6; 
+			}
+			.body-container{
+				padding-top: 15vh;
+			}
+			
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 30px;
+			}
+			.modal-footer{
+				background-color: #f9f9f9;
+			}
+			.hero {
+				position:relative;
+				margin:10px 10px;
+				padding: 1.5rem;
+			}
+			.hero-element{
+				text-align: center;
+				padding: 20px;
+				color:white;
+			}
+			.hero-header {
+				font-size:48px;
+				color:white;
+				text-align: center;
+				letter-spacing: 4px;
+				font-weight:bold;
+				padding: 20px;
+			}
+
+			.hero-subheader {
+				color: white;
+				text-align: center;
+				font-weight: normal;
+				letter-spacing: 2px;
+				font-size: 20px;
+				padding:10px;
+
+			}
+			
+			@media (max-width: 576px){
+				.hero-element{
+					padding:5px;
+				}
+				.hero-header{
+					font-size: 32px;
+					padding:10px;
+				}
+				.hero-subheader{
+					font-size:16px;
+					padding:5px;
+				}
+			}
+			.footer-copyright{
+				color:white;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+			}
+		</style>
+        {% endblock %}
+{% block searchBody %}
+    <!-- Body -->
+    <div class="container-fluid body-container">
+        <div class="hero">
+            <div class="hero-element">
+                <div class="hero-header">Searching for schools?</div>
+            </div>
+            <div class="hero-element">
+                <div class="hero-subheader">Get your best choice with SchoolFinder!</div>
+            </div>
+            <div class="hero-element">
+                <a href="{% url 'search_method' %}" class="btn btn-outline-light btn-lg">Start Search</a>
+            </div>
+            <div class="hero-element">
+                <a href="{% url 'kindergarten-list' %}" class="btn btn-outline-light btn-lg">Show All Schools</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
