@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import View
 from .models import School, Kindergarten
 from django.utils import timezone
 from users.models import User
@@ -134,19 +136,28 @@ def fuzzy_filter(user_input, collection):
     return suggestions
 
     
-def school_info(request, centre_code):
-    school = School.object.all()
+# class SchoolListView(ListView):
+#     model = Kindergarten
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['now'] = timezone.now()
+#         return context
 
-    return HttpResponse("You are look at school %s.".format(name))
-
-
-class SchoolListView(ListView):
-    model = Kindergarten
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+class SchoolListView(View):
+    def get(self, request):
+        kindergarten_list = Kindergarten.objects.all()
+        page = request.GET.get('page', 1)
+        
+        paginator = Paginator(kindergarten_list, 10)
+        try:
+            kindergarten = paginator.page(page)
+        except PageNotAnInteger:
+            kindergarten = paginator.page(1)
+        except EmptyPage:
+            kindergarten = paginator.page(paginator.num_pages)
+        
+        return render(request, 'schoolList.html', {'kindergarten': kindergarten})
 
 class SchoolDetailView(DetailView):
 
