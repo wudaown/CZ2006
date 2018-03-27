@@ -39,6 +39,7 @@ class User(AbstractUser):
     mobile = models.CharField(max_length=8, null=True, blank=True)
     mailbox = models.OneToOneField(MailBox,on_delete=models.CASCADE,null=True)
     following = models.ManyToManyField(Kindergarten)
+    compare_schools=models.ManyToManyField(School, through='CompareList')
 
     class Meta:
         verbose_name = 'Users'
@@ -67,4 +68,3 @@ class EmailVerifyRecord(models.Model):
     class Meta:
         verbose_name = 'Verify Email Address'
         verbose_name_plural = verbose_name
-

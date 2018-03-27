@@ -26,7 +26,7 @@ urlpatterns = [
 	path('', index, name='index'),
 	#path('xadmin/', xadmin.site.urls),
 	path('admin/', admin.site.urls),
-	path('schools/',include('schools.urls'),name = 'schools'),
+	path('compare/',include('compare.urls'),name = 'compare'),
 	path('users/', include('users.urls'), name='users'),
 	path('schools/', include('schools.urls'), name='schools'),
 	path('active/<slug:active_code>/', ActiveView.as_view(), name='active'),
