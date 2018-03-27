@@ -15,22 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import index
-from users.views import ActiveView, ResetView
-# from schools.admin import admin_site
-import xadmin
+from users.views import ActiveView, ResetView, LoginView
 from django.views.generic import TemplateView
 
 urlpatterns = [
-	# path('', TemplateView.as_view(template_name='index.html'), name='index'),
-	path('', index, name='index'),
-	#path('xadmin/', xadmin.site.urls),
+	path('', LoginView.as_view(), name='index'),
 	path('admin/', admin.site.urls),
-	path('compare/',include('compare.urls'),name = 'compare'),
+	path('compare/', include('compare.urls'), name='compare'),
 	path('users/', include('users.urls'), name='users'),
 	path('schools/', include('schools.urls'), name='schools'),
 	path('active/<slug:active_code>/', ActiveView.as_view(), name='active'),
-	path('reset/<slug:reset_code>/', ResetView.as_view(), name='reset')
-	# path('login/', TemplateView.as_view(template_name='login.html'), name='login')
-	# path('myadmin/', admin_site.urls)
+	path('reset/<slug:reset_code>/', ResetView.as_view(), name='reset'),
+	path('search/', TemplateView.as_view(template_name='search_method.html'), name='search_method')
 ]
