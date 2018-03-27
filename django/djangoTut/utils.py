@@ -71,7 +71,7 @@ def crawler():
 	baseurl = 'https://www.msf.gov.sg/dfcs/kindergarten/view.aspx?id='
 
 	lang = Language.objects.all()
-	if lang is  None:
+	if lang.count() == 0:
 		chinese = Language()
 		chinese.language = 'Chinese'
 		tamil = Language()
