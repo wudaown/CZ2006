@@ -3,6 +3,7 @@ from .views import SchoolListView, SchoolDetailView, saveToList, guild_search, a
 
 urlpatterns = [
 	path('guide_search/', guild_search, name='school'),
+
 	# ex: /polls/5/
 	path('advance/', advanced_search, name='detail'),
 	path('', SchoolListView.as_view(), name='kindergarten-list'),

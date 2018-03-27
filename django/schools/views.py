@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import View
-from .models import School, Kindergarten
+from .models import Kindergarten, School
 from django.utils import timezone
 from users.models import User
 from django.http import Http404
@@ -16,6 +16,9 @@ import json
 import re
 
 
+
+def guild_search(request):
+    return render(request, 'search_by_guidance.html')
 
 
 def advanced_search(request):
@@ -61,20 +64,58 @@ def guild_search(request):
             kindergarten = selecetSPARK(kindergarten)
         # kindergarten = distant_selection(int(p_dis), p_post, kindergarten)
         kindergarten = price_select(str(p_price), kindergarten, k2)
-        kindergarten = fuzzy_filter(p_second, kindergarten)
+        kindergarten = language_select(p_second, kindergarten)
+        print(kindergarten)
         return render(request, 'table.html', {'user_list':kindergarten})
 
-def price_select(price, collection, k2):
-    price1 = int(re.search(r'\d+', price).group())
-    price = price.replace(str(price1), '')
-    price2 = int(re.search(r'\d+', price).group())
-    lower = min(price1, price2)
-    upper = max(price1, price2)
-    if k2:
-        target_kind = collection.filter(k2fee__gte=lower, k2fee__lte=upper)
-    else:
-        target_kind = collection.filter(k2fee__gte=lower, k2fee__lte=upper)
+def language_select(p_second, collection):
+    if p_second == 'cn':
+        target_kind = collection.filter(language='Chinese')
+    if p_second == 'my':
+        target_kind = collection.filter(language='Malay')
+    if p_second == 'tm':
+        target_kind = collection.filter(language='Tamil')
     return target_kind
+
+def price_select(price, collection, k2):
+    #todo
+    int_p = int(price)
+    if int_p == 1000:
+        if k2:
+            target_kind = collection.filter(k2fee__lte=1000)
+        else:
+            target_kind = collection.filter(k1fee__lte=1000)
+    elif int_p == 1500:
+        if k2:
+            target_kind = collection.filter(k2fee__gte=1000, k2_fee__lte=1500)
+        else:
+            target_kind =collection.filter(k1fee__gte=1000, k1_fee__lte=1500)
+    elif int_p == 2000:
+        if k2:
+            target_kind = collection.filter(k2fee__gte=1500, k2_fee__lte=2000)
+        else:
+            target_kind =collection.filter(k1fee__gte=1500, k1_fee__lte=2000)
+    elif int_p == 2500:
+        if k2:
+            target_kind = collection.filter(k2fee__gte=2000, k2_fee__lte=2500)
+        else:
+            target_kind = collection.filter(k1fee__gte=2000, k1_fee__lte=2500)
+    elif int_p == 3000:
+        if k2:
+            target_kind = collection.filter(k2fee__gte=2500, k2_fee__lte=3000)
+        else:
+            target_kind = collection.filter(k1fee__gte=2500, k1_fee__lte=3000)
+    else:
+        if k2:
+            target_kind = collection.filter(k2fee__gte=3000)
+        else:
+            target_kind = collection.filter(k1fee__gte=3000)
+    # if k2:
+    #     target_kind = collection.filter(k2fee__gte=lower, k2fee__lte=upper)
+    # else:
+    #     target_kind = collection.filter(k1fee__gte=lower, k1fee__lte=upper)
+    return target_kind
+
 def selecetMOE(collection):
     # target_kind = collection.filter(MOE == True)
     target_kind = collection.filter(type='MOE')
@@ -102,8 +143,17 @@ def year_kindergarten(K2, collection):
     return target_kind
 
 def distant_selection(target_distant, zip, collection):
-    target_kind = collection.filter(calculatedistance(Kindergarten.postalcode, zip) < target_distant)
-    return target_kind
+    # target_kind = collection.filter(calculatedistance(Kindergarten.postalcode, zip) < target_distant)
+    # return target_kind
+    if target_distant[2] != '':
+        return collection
+    else:
+        target_kind = []
+        for i in collection:
+            dis = calculatedistance(i.postalcode, zip)
+            if dis < target_distant:
+                target_kind.append(i)
+        return target_kind
 
 
 def calculatedistance(zip_home, zip_school):
@@ -176,13 +226,13 @@ class SchoolDetailView(DetailView):
 
             return render(
                 request,
-                'school-detail',
+                'kindergaten_detail.html',
                 context={'kindergarten': school_id, 'user ':user,}
             )
         else:
             return render(
                 request,
-                'school-detail',
+                'kindergaten_detail.html',
                 context={'kindergarten': school_id, 'user ': None, }
             )
 
