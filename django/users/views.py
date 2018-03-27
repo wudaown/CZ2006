@@ -9,11 +9,6 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import make_password
 from djangoTut.utils import send_verify_mail
 from django.http import HttpResponse, HttpResponseRedirect
-#from django.contrib.auth.models import User
-from django.http import Http404
-from django.template import Context
-from django.template.loader import get_template
-import pdb
 
 
 # Create your views here.
@@ -79,7 +74,7 @@ class LoginView(View):
                 #  a = checkMailbox(user)
                 # return HttpResponseRedirect(reverse('user_page'))
                 # return render(request, 'user_page.html')
-                 a = checkMailbox(user)
+                a = checkMailbox(user)
 
                 return redirect('/users/'+username)
             else:
