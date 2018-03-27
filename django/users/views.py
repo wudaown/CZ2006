@@ -67,15 +67,16 @@ class LoginView(View):
             # username and password need to be specify
             user = authenticate(username=username, password=passwd)
             if user is not None:
-
                 login(request, user)
+                request.session['member_id'] = username
                 # return HttpResponseRedirect('login.html')
                 # return render(request, 'index.html')
-                # return HttpResponseRedirect('/')
-                # return redirect('/')
-
+                #  a = checkMailbox(user)
+                # return HttpResponseRedirect(reverse('user_page'))
+                # return render(request, 'user_page.html')
                 a = checkMailbox(user)
-                return HttpResponseRedirect(reverse('index'))
+
+                return redirect('/users/'+username)
             else:
                 msg = {'msg': 'Username or Password Wrong'}
                 return render(request, 'login.html', msg)
@@ -99,7 +100,8 @@ class RegisterView(View):
             password = register_form.data['password']
             email = register_form.data['email']
             if User.objects.filter(username=username):
-                return render(request, 'register.html', {'msg': 'Username already exists'})
+                return HttpResponseRedirect(reverse('register'))
+                # return render(request, 'register.html', {'msg': 'Username already exists'})
             user = User()
             # Only if email activation is needed then set is_active false
             user.is_active = False
@@ -125,6 +127,10 @@ class RegisterView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
+        try:
+            del request.session['member_id']
+        except KeyError:
+            pass
         return render(request, 'index.html')
 
 
@@ -149,6 +155,16 @@ class ForgetPasswordView(View):
         send_verify_mail(email, 1)
         return render(request, 'forget.html', {'msg': 'Submission done. Please your email'})
 
+class UserPageView(View):
+    def get(self, request, username):
+        user = User.objects.filter(username=username)
+        if user is not None:
+            return render(request, 'user_page.html', {'username' : username})
+        else:
+            return HttpResponse("Wrong username")
+
+
+
 
 def checkMailbox(user):
     mailbox = user.mailbox
@@ -159,15 +175,39 @@ def checkMailbox(user):
         qs.viewed = True
         qs.save()
     return output
-
 def notifyUser(sender, userlist, message):
     msg = Message.objects.create(from_id=sender.id, content = message)
     for user in userlist:
         user.mailbox.objects.add(msg)
     return
 
+def getschoolfollower(school):
+    userlist = school.following.all()
+    return userlist
 
 
+'''def user_page(request):
+    try:
+        user = User.objects.get(username=request.session['member_id'])
+    except:
+        raise Http404('Requested user not found.')
+    bookmarks = user.bookmark_set.all()
+    template = get_template('user_page.html')
+    variables = Context({
+            'username': username,
+            'bookmarks': bookmarks
+    })
+    output = template.render(variables)
+    return HttpResponse(output)'''
 
+def saveToList(request,id):
+    user = User.objects.get(username=request.session['member_id'])
+    if user is not None:
+        school = Kindergarten.objects.get(id = id)
+        user.following.add(school)
+        user.save()
+        return HttpResponse("<script>Save.Response_OK();</script>")
+    else:
+        return render(request, 'login.html')
 
 
