@@ -176,13 +176,13 @@ class SchoolDetailView(DetailView):
 
             return render(
                 request,
-                'school-detail',
+                'kindergaten_detail.html',
                 context={'kindergarten': school_id, 'user ':user,}
             )
         else:
             return render(
                 request,
-                'school-detail',
+                'kindergaten_detail.html',
                 context={'kindergarten': school_id, 'user ': None, }
             )
 
