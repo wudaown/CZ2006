@@ -15,7 +15,7 @@ def add(request, u, s):
 
 
 def remove(request, u, s):
-	cl = CompareList.objects.filter(user=u, school=s).delete()
+	CompareList.objects.filter(user=u, school=s).delete()
 	return HttpResponse("%s deleted from %s's compare list".format(s, u))
 
 
