@@ -56,3 +56,5 @@ django/db.sqlite3
 *.sqlite3
 django/schools/migrations/0002_auto_20180327_0543.py
 django/db.sqlite3
+django/users/migrations/0001_initial.py
+django/schools/migrations/0001_initial.py

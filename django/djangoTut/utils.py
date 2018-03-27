@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+
 from schools.models import School, Kindergarten, Language
 from djangoTut.settings import EMAIL_HOST_USER
 from requests_html import HTMLSession
@@ -6,7 +7,6 @@ import random
 import string
 
 from users.models import EmailVerifyRecord
-
 
 def active_generator(n):
 	return ''.join(random.choices(string.ascii_uppercase + string.digits, k=n))

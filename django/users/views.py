@@ -9,6 +9,12 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import make_password
 from djangoTut.utils import send_verify_mail
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic.list import ListView
+from django.utils import timezone
+# from django.contrib.auth.models import User
+from django.http import Http404
+from django.template import Context
+from django.template.loader import get_template
 
 
 # Create your views here.
@@ -74,8 +80,11 @@ class LoginView(View):
                 # return render(request, 'user_page.html')
                 # a = checkMailbox(user)
 
-                return HttpResponseRedirect(reverse('index'))
                 # return redirect('/users/' + username)
+                a = checkMailbox(user,isviewed=False)
+                return HttpResponseRedirect(reverse('index'))
+                #todo should stay on index and only enter user page when clicked
+                return redirect('/users/' + username)
             else:
                 msg = {'msg': 'Username or Password Wrong'}
                 return render(request, 'index.html', msg)
@@ -135,8 +144,9 @@ class LogoutView(View):
 
 
 class NotificationCenterView(View):
-    # TODO how to know who is the user
-    def get(self, request, user):
+    #todo 这个和userpageview重合了
+    def get(self, request):
+        user = request.user
         output = set()
         messages = Message_Mailbox.objects.filter(mailbox_id=user.mailbox_id)
         for qs in messages:
@@ -158,19 +168,21 @@ class ForgetPasswordView(View):
 
 class UserPageView(View):
     def get(self, request, username):
-        user = User.objects.filter(username=username)
+        user = User.objects.get(username=username)
+        output = checkMailbox(user,isviewed=True)
+        flist = user.following.all()
         if user is not None:
-            return render(request, 'user_page.html', {'username': username},{'followingList':user.following.all()})
+            return render(request, 'user_page.html', {'username': username,'message_list':output,'followingList':flist,})
         else:
             return HttpResponse("Wrong username")
 
 
-def checkMailbox(user):
+def checkMailbox(user,isviewed):
     mailbox = user.mailbox
     output = set()
-    unread_messages = Message_Mailbox.objects.filter(mailbox_id=mailbox.id, viewed=False)
+    unread_messages = Message_Mailbox.objects.filter(mailbox_id=mailbox.id, viewed=isviewed)
     for qs in unread_messages:
-        output.add(qs.message.content)
+        output.add([User.objects.get(id = qs.message.from_id).username ,qs.message.content])
         qs.viewed = True
         qs.save()
     return output
