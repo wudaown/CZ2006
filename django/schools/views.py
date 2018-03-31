@@ -23,7 +23,7 @@ def advanced_search(request):
 
 def guided_search(request):
 	if request.method == 'GET':
-		return render(request, 'table.html')
+		return render(request, 'search_by_guidance.html')
 	if request.method == 'POST':
 		p_sg = request.POST.get('singaporean_key')
 		p_certificate = request.POST.get('certificate_key')
@@ -45,7 +45,7 @@ def guided_search(request):
 		kindergarten = price_select(str(p_price), kindergarten, k2)
 		kindergarten = language_select(p_second, kindergarten)
 		print(kindergarten)
-		return render(request, 'table.html', {'user_list': kindergarten})
+		return render(request, 'search_by_guidance.html', {'user_list': kindergarten})
 
 
 def language_select(p_second, collection):

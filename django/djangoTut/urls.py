@@ -26,5 +26,6 @@ urlpatterns = [
 	path('schools/', include('schools.urls'), name='schools'),
 	path('active/<slug:active_code>/', ActiveView.as_view(), name='active'),
 	path('reset/<slug:reset_code>/', ResetView.as_view(), name='reset'),
-	path('search/', TemplateView.as_view(template_name='search_method.html'), name='search_method')
+	path('search/', TemplateView.as_view(template_name='search_method.html'), name='search_method'),
+
 ]
