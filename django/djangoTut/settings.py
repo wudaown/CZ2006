@@ -38,9 +38,9 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	'users.apps.UsersConfig',
+	'users',
+	'schools',
 	'compare',
-	'schools.apps.SchoolsConfig'
 ]
 
 # Override default user database

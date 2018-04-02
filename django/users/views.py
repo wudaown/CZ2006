@@ -232,5 +232,3 @@ class WatchListView(ListView):
 		context['now'] = timezone.now()
 		return context
 '''
-
-

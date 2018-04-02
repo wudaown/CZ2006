@@ -9,7 +9,7 @@ from datetime import datetime
 
 class Language(models.Model):
 	language = models.CharField(choices=(('Chinese', 'Chinese'), ('Tamil', 'Tamil'), ('Hindi', 'Hindi'), ('Malay', 'Malay'), ('Arabic', 'Arabic')), max_length=20, verbose_name='Language')
-	#todo what is this?
+
 	class Meta:
 		verbose_name = 'Language'
 		verbose_name_plural = 'Languages'
