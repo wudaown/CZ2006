@@ -21,7 +21,8 @@ class Message_Mailbox(models.Model):
 
 
 class Message(models.Model):
-    from_id = models.OneToOneField('User', on_delete=models.CASCADE)
+    #from_id = models.OneToOneField('User', on_delete=models.CASCADE)
+    #todo: from_id to be removed due to no teacher user?
     content = models.CharField(max_length=2000)
 
 class MailBox(models.Model):

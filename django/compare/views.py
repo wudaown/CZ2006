@@ -20,7 +20,7 @@ def remove(request):
 	u = request.POST.get('user_key')
 	s = request.POST.get('kindergarten_key')
 	CompareList.objects.filter(user=u, school=s).delete()
-	return render(request, 'compare_modify.html', {'msg': '%s deleted from %s\'s compare list'.format(s, u))
+	#return render(request, 'compare_modify.html', {'msg': '%s deleted from %s\'s compare list'.format(s, u))
 
 
 def result(request, order_by='data'):
