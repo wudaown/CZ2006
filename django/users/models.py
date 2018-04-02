@@ -31,6 +31,8 @@ class MailBox(models.Model):
 class CompareList(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     school = models.ForeignKey('schools.Kindergarten', on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('user','school')
 
 class User(AbstractUser):
     username = models.CharField(max_length=20, verbose_name='Username', unique=True)

@@ -166,7 +166,7 @@ class SchoolListView(View):
 	def get(self, request):
 		kindergarten_list = Kindergarten.objects.all()
 		page = request.GET.get('page', 1)
-
+		
 		paginator = Paginator(kindergarten_list, 10)
 		try:
 			kindergarten = paginator.page(page)
@@ -184,7 +184,7 @@ class SchoolDetailView(View):
 			school = Kindergarten.objects.get(pk=pk)
 		except Kindergarten.DoesNotExist:
 			raise Http404("Kindergarten does not exists")
-
+		
 		context = {'school': school}
 		return render(request, 'school_detail.html', context)
 
