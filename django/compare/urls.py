@@ -2,7 +2,8 @@ from django.conf.urls import url
 from compare import views
 
 urlpatterns = [
-    url(r'^$',views.add,name='add'),
-    url(r'^$',views.remove,name='remove'),
-    url(r'^$',views.result,name='result'),
+    path('add/', views.add, name='compare_add'),
+    path('remove/', views.remove, name='compare_remove'),
+    path('<order_by>/', views.result, name='compare_result'),
+    # passing in based on what to order by!
 ]
