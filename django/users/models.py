@@ -21,7 +21,7 @@ class Message_Mailbox(models.Model):
 
 
 class Message(models.Model):
-    from_id = models.OneToOneField('User', on_delete=models.CASCADE)
+    #from_id = models.OneToOneField('User', on_delete=models.CASCADE)
     content = models.CharField(max_length=2000)
 
 class MailBox(models.Model):
