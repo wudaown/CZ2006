@@ -16,7 +16,7 @@ def add(request):
 		'Cannot add to compare because there are already 3 schools in compare.'})
 
 	try:
-		s = request.POST.get('kindergarten_key')
+		s = request.POST.get('kindergarten_key') # TODO
 		relation = CompareList(user=u, school=s)
 		relation.save()
 		return render(request, 'compare_modify.html', {'msg': 'Add to compare list succeeded.'})
@@ -30,7 +30,7 @@ def remove(request):
 	except:
 		return render(request, 'login.html')
 
-	s = request.POST.get('kindergarten_key')
+	s = request.POST.get('kindergarten_key')  # TODO
 	CompareList.objects.filter(user=u, school=s).delete()
 	return render(request, 'compare_modify.html', {'msg': '%s deleted from %s\'s compare list'.format(s, u)})
 
