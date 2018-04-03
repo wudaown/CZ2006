@@ -26,21 +26,21 @@ def guided_search(request):
 		return render(request, 'search_by_details.html')
 	if request.method == 'POST':
 		p_sg = request.POST.get('citizenship')
-		print(p_sg)
+		# print(p_sg)
 		p_certificate = request.POST.get('SPARK')
-		print(p_certificate)
+		# print(p_certificate)
 		p_year = request.POST.get('age')
-		print(p_year)
+		# print(p_year)
 		p_post = request.POST.get('adr')
-		print(p_post)
+		# print(p_post)
 		p_dis = request.POST.get('distance')
-		print(p_dis)
+		# print(p_dis)
 		p_price = request.POST.get('fee')
-		print(p_price)
+		# print(p_price)
 		p_second = request.POST.get('language')
-		print(p_second)
-		if p_second == 'ch':
-			print(1)
+		# print(p_second)
+		# if p_second == 'ch':
+		# 	print(1)
 		kindergarten = Kindergarten.objects.all()
 
 		k2 = False
@@ -52,18 +52,30 @@ def guided_search(request):
 		if p_certificate.upper() == 'YES' or p_certificate.upper() == 'Y':
 			kindergarten = selecetSPARK(kindergarten)
 		kindergarten = price_select(str(p_price), kindergarten, k2)
-		# kindergarten = language_select(p_second, kindergarten)
-		# kindergarten = distant_selection(p_dis, p_post,kindergarten)
+		kindergarten = language_select(p_second, kindergarten)
+		kindergarten = distant_selection(p_dis, p_post,kindergarten)
+		# for i in kindergarten:
+		# 	print(i.name, i.postalcode, i.type, i.email, i.language)
+
 		# # print(kindergarten)
 		# # # return render(request, 'search_by_details.html', {'user_list': kindergarten})
-		return render(request, 'school_page.html', {'kindergarten': kindergarten})
+		return render(request, 'search_by_details.html', {'kindergarten': kindergarten})
 		# return render(request, 'search_by_details.html')
+
+
 def distant_selection(target_distant, zip, collection):
 	target_kind = []
-	for i in collection:
-		cal = calculatedistance(i.postalcode, zip)
-		if cal < target_distant:
-			target_kind.append(i)
+	a = [2, 5, 10, 15, 20]
+	if len(target_distant) == 3:
+		target_kind = collection
+	else:
+		for i in range(0, 5):
+			if a[i] == int(target_distant):
+				break
+		for i in collection:
+			cal = calculatedistance(i.postalcode, zip)
+			if cal < target_distant:
+				target_kind.append(i)
 	return target_kind
 	# target_kind = collection.filter(calculatedistance(Kindergarten.postalcode, zip) < target_distant)
 	# return target_kind
@@ -105,7 +117,7 @@ def price_select(price, collection, k2):
 		# else:
 		target_kind = only_xiao_dollar(collection, 150, k2)
 	else:
-		for i in range(0, 4):
+		for i in range(0, 5):
 			if a[i] == int(price):
 				break
 		if i == 0:
@@ -201,13 +213,21 @@ def only_xiao_dollar(collection, upper, k2):
 	# #     target_kind = collection.filter(k1fee__gte=lower, k1fee__lte=upper)
 	# return target_kind
 def language_select(p_second, collection):
-	target_kind = collection
+	target_kind = []
 	if p_second == 'cn':
-		target_kind = collection.filter(language='Chinese')
-	if p_second == 'my':
-		target_kind = collection.filter(language='Malay')
-	if p_second == 'tm':
-		target_kind = collection.filter(language='Tamil')
+		for i in collection:
+			if 'Chinese' in [str(j) for j in i.language.all()]:
+				target_kind.append(i)
+	elif p_second == 'my':
+		for i in collection:
+			if 'Malay' in [str(j) for j in i.language.all()]:
+				target_kind.append(i)
+	elif p_second == 'tm':
+		for i in collection:
+			if 'Tamil' in [str(j) for j in i.language.all()]:
+				target_kind.append(i)
+	else:
+		target_kind = collection
 	return target_kind
 
 
