@@ -1,6 +1,31 @@
-{% extends 'base.html' %}
-{% block style %}
+<!doctype html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+    <title>SchoolFinder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.body-container{
+				padding-top: 15vh;
+			}
+			
 			.modal-header,h6,.close{
 				background-color: #ca1632;
 				color: white !important;
@@ -35,21 +60,6 @@
 				margin: auto;
 				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			}
-			html {
-				  height: 100%;
-				  box-sizing: border-box;
-			}
-			*,
-			*:before,
-			*:after {
-			  box-sizing: inherit;
-			}
-			body {
-			  position: relative;
-			  margin: 0;
-			  padding-bottom: 6rem;
-			  min-height: 100%;
-			}
 			.footer-copyright{
 				color:white;
 				width: 100%;
@@ -59,9 +69,91 @@
 				bottom: 0;
 				left: 0;
 			}
+			
 		</style>
-{% endblock %}
-{% block searchMethod %}
+	</head>
+	<body>
+	<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown" style="padding-right: 15px;">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+							<a class="dropdown-item" href="search_by_details.html">By school details</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<button type="button" class="btn btn-link px-0 nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-circle-o">&nbsp;</i>Login / Registration</button>	
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- Login & Registration Modal -->
+		<div class="modal fade" id="loginModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 20px;">
+						<h6>Login / Registration</h6>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" style="padding: 30px 40px;">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs">
+							<li class="nav-item"><a class="nav-link active" href="#Login" data-toggle="tab">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="#Registration" data-toggle="tab">Registration</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<!-- Login pane -->
+							<div class="tab-pane active" id="Login" style="margin: auto">
+								<form role="form">
+									<div class="form-group">
+										<lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+										<input type="text" class="form-control" id="usrname" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+										<input type="text" class="form-control" id="psw" placeholder="Enter password">
+									</div>
+									<div class="custom-checkbox">
+										<label><input type="checkbox" value="" checked>&nbsp;Remember me</label>
+									</div>
+									<button type="submit" class="btn btn-success btn-block">Login</button>
+									<div style="display: inline"><a href="#">Forgot your password?</a></div>
+								</form>
+							</div>
+							<!-- Registration pane -->
+							<div class="tab-pane" id="Registration">
+								<form role="form">
+									<div class="form-group">
+										<lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+										<input type="text" class="form-control" id="reg-usrname" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+										<input type="text" class="form-control" id="reg-psw" placeholder="Enter password">
+									</div>
+									<div class="form-group">
+										<label for="confirm-psw"><i class="fa fa-eye"></i>&nbsp;Confirm Password</label>
+										<input type="text" class="form-control" id="reg-psw-confirm" placeholder="Enter password again">
+									</div>
+									<button type="submit" class="btn btn-info btn-block">Sign up</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Body -->
 		<div class="container-fluid">
 			<div class="row">
@@ -88,4 +180,26 @@
 				</div> 
 			</div>
 		</div>
-{% endblock %}
+		
+		<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			&copy; 2018 TEAM UNDEFINED
+		</div>
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<script>
+			function fav-toggle(){
+				var btn = document.getElementById("fav-btn");
+				if (btn.class = "fa fa-heart"){
+					btn.class = "fa fa-heart-o";
+					// & remove this school from favorite list
+				}
+				if (btn.class = "fa fa-heart-o"){
+					btn.class = "fa fa-heart";
+					// & add this school to favorite list
+				}
+			}
+		</script>
+ 	</body>

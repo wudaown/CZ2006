@@ -14,6 +14,7 @@
 
 <body>
 <!-- Navbar -->
+{% if not request.user.is_authenticated %}
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
     <a class="navbar-brand" href="{% url 'index' %}">SchoolFinder.com</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,51 +31,106 @@
                     <a class="dropdown-item" href="search_by_details.html">By school details</a>
                 </div>
             </li>
-            {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <button type="button" class="btn btn-link px-0 nav-link" ><i class="fa fa-user-circle-o">&nbsp;</i>{{ user.username }}</button>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'logout' %}" type="button" class="btn btn-link px-0 nav-link" ><i class="fa fa-user-circle-o">&nbsp;</i></a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                <button type="button" class="btn btn-link px-0 nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-circle-o">&nbsp;</i>Login</button>
-            {% endif %}
+                <button type="button" class="btn btn-link px-0 nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-circle-o">&nbsp;</i>Login / Registration</button>
             </li>
         </ul>
     </div>
 </nav>
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+    <a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" style="padding-right: 15px;">
+                <a class="nav-link dropdown-toggle" href="#" id="search" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+                </a>
+                <div class="dropdown-menu" aria-labelledby="searchDropdown">
+                    <a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+                    <a class="dropdown-item" href="search_by_details.html">By school details</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="myAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o">&nbsp;</i>My account <div class="badge badge-pill badge-warning">3</div>
+                </a>
+                <div class="dropdown-menu" style="right: 0; left: auto" aria-labelledby="myAccountDropdown">
+                    <div class="dropdown-header">{{ user.username }}</div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'user_profile' user.username %} "><i class="fa fa-user-circle-o">&nbsp;</i>My profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="favorite_school.html"><i class="fa fa-heart-o">&nbsp;</i>Favorite schools</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-bell-o">&nbsp;</i>Notifications &nbsp;<div class="badge badge-pill badge-warning" style="float: right">3</div></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
 
-<!-- Login Modal -->
+<!-- Login & Registration Modal -->
 <div class="modal fade" id="loginModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="padding: 20px;">
-                <h6>Login to your account</h6>
+                <h6>Login / Registration</h6>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body" style="padding: 30px 40px;">
-                <form method="post" role="form" action="{% url 'index' %}">
-                    <div class="form-group">
-                        <lable for="uname"><i class="fa fa-user"></i>&nbsp;Username</lable>
-                        <input type="text" class="form-control" placeholder="Enter username" name="uname">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" href="#Login" data-toggle="tab">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#Registration" data-toggle="tab">Registration</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- Login pane -->
+                    <div class="tab-pane active" id="Login" style="margin: auto">
+                        <form role="form" method="post" action="{% url 'index' %}">
+                            <div class="form-group">
+                                <lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+                                <input type="text" class="form-control" id="usrname" name="uname" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+                                <input type="password" class="form-control" id="psw" name="passwd" placeholder="Enter password">
+                            </div>
+                            <div class="custom-checkbox">
+                                <label><input type="checkbox" value="" checked>&nbsp;Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Login</button>
+                            <div style="display: inline"><a href="#">Forgot your password?</a></div>
+                            {% csrf_token %}
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="passwd"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
-                        <input type="password" class="form-control" placeholder="Enter password" name="passwd">
+                    <!-- registration pane -->
+                    <div class="tab-pane" id="Registration">
+                        <form role="form" method="post" action="{% url 'register' %}">
+                            <div class="form-group">
+                                <lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+                                <input type="text" class="form-control" id="reg-usrname" name="username" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+                                <input type="password" class="form-control" id="reg-psw" name="password" placeholder="Enter password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-psw"><i class="fa fa-eye"></i>&nbsp;Confirm Password</label>
+                                <input type="password" class="form-control" id="reg-psw-confirm" name="password" placeholder="Enter password again">
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fa fa-eye"></i>&nbsp;Email</label>
+                                <input type="text" class="form-control" id="reg-psw-confirm" name="email" placeholder="Enter Email">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-block">Sign up</button>
+                            {% csrf_token %}
+                        </form>
                     </div>
-                    <div class="custom-checkbox">
-                        <label><input type="checkbox" value="" checked>&nbsp;Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-info btn-block">Login</button>
-                    {% csrf_token %}
-                </form>
-            </div>
-            <div class="modal-footer" >
-                <p class="text-right">Not a member? <a href="{% url "register" %}">Sign Up</a><br/>
-                    Forgot your password? <a href="#">Find Password</a>
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -86,6 +142,8 @@
 {% block kindergartenDetail %}
 {% endblock %}
 {% block searchMethod %}
+{% endblock %}
+{% block profileblock %}
 {% endblock %}
 
 <!-- Copyright -->

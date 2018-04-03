@@ -169,6 +169,7 @@ class ForgetPasswordView(View):
 class UserPageView(View):
 	def get(self, request, username):
 		user = User.objects.get(username=username)
+<<<<<<< HEAD
 		read = checkMailbox(user, isviewed=True)
 		unread = checkMailbox(user, isviewed=False)
 		flist = user.following.all()
@@ -176,6 +177,18 @@ class UserPageView(View):
 			return render(request, 'user_page.html',
 						  {'username': username, 'read_message_list': read,
 						   'followingList': flist, 'unread_message_list':unread})
+=======
+		if not user.is_superuser:
+			output = checkMailbox(user, isviewed=True)
+		flist = user.following.all()
+		if user is not None:
+			context = {'username': username,
+			           'email': user.email,
+			            }
+			# return render(request, 'user_profile.html',
+			#               {'username': username, 'message_list': output, 'followingList': flist, })
+			return render(request, 'user_profile.html', context)
+>>>>>>> 317af31165fae2597b1744c6025a3b82a9e89d2d
 		else:
 			return HttpResponse("Wrong username")
 

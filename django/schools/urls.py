@@ -2,7 +2,7 @@ from django.urls import path
 from .views import SchoolListView, SchoolDetailView, saveToList, guided_search, advanced_search, deleteFromList
 
 urlpatterns = [
-	path('search_by_guidance/', guided_search, name='school'),
+	path('search_by_details/', guided_search, name='school'),
 	#path('search_by_details/',)
 	#todo detail_search 是哪个啊？
 	# ex: /polls/5/
