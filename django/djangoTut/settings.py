@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'users.apps.UsersConfig',
-	'schools.apps.SchoolsConfig'
+	'schools.apps.SchoolsConfig',
 	'compare',
 ]
 
