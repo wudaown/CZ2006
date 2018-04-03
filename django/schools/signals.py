@@ -23,12 +23,4 @@ def save_callback(sender, **kwargs):
         #msg.from_id= 1
         msg.save()
         userlist = getschoolfollower(kindergarten)
-<<<<<<< HEAD
         notifyUser(userlist,msg)
-
-
-
-
-=======
-        notifyUser(User(), userlist, msg)
->>>>>>> 317af31165fae2597b1744c6025a3b82a9e89d2d
