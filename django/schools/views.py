@@ -22,6 +22,7 @@ def advanced_search(request):
 
 
 def guided_search(request):
+
     if request.method == 'GET':
         return render(request, 'search_by_guidance.html')
     if request.method == 'POST':
@@ -46,6 +47,7 @@ def guided_search(request):
         kindergarten = language_select(p_second, kindergarten)
         print(kindergarten)
         return render(request, 'search_by_guidance.html', {'user_list': kindergarten})
+
 
 def selecetMOE(collection):
     # target_kind = collection.filter(MOE == True)
