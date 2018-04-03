@@ -140,104 +140,123 @@
 			</div>
 			<div class="row">
 				<div class="col">
-				  <div class="card border-light">
-                      <form method="post">
-						<div class="card-body" id="qn1">
-							<h5 class="card-title">Question 1/7</h5>
-							<p class="card-text" id="question">Is your child a Singaporean?</p>
-                            <input name="nation" type="text" value="yes" placeholder="yes" hidden>
-							<input name='national' type="button" value="Yes" class="btn btn-outline-danger" onClick="qn1()">
-							<!-- <input name='national' type="button" value="No" class="btn btn-outline-danger" onClick="qn1()"> -->
-						</div>
-						<div class="card-body" id="qn2" style="display: none">
-							<h5 class="card-title">Question 2/7</h5>
-							<p class="card-text">Do you prefer spark certified schools?</p>
-							<input type="button" value="Yes" class="btn btn-outline-danger" onClick="qn2()">
-							<input type="button" value="No" class="btn btn-outline-danger" onClick="qn2()">
-						</div>
-						<div class="card-body" id="qn3" style="display: none">
-							<h5 class="card-title">Question 3/7</h5>
-							<p class="card-text">How old is your child?</p>
-							<div class="input-group my-4">
-								<div class="input-group-prepend">
-									<label class="input-group-text" for="age">Age</label>
+					<form method="post">
+						<div class="card border-light">
+							<div class="card-body" id="qn1">
+								<h5 class="card-title">Question 1/7</h5>
+								<p class="card-text" id="question">Is your child a Singaporean?</p>
+<!--
+								<input type="button" value="Yes" class="btn btn-outline-danger" onClick="qn1()">
+								<input type="button" value="No" class="btn btn-outline-danger" onClick="qn1()">
+-->
+								<div class="form-check">
+								<input class="form-check-input" type="radio" name="singaporean" value="Yes" id="sg-yes">
+								<label class="form-check-label" for="sg-yes">Yes</label>
 								</div>
-								<select class="custom-select" id="ageSelector">
-									<option selected>Choose...</option>
-									<option value="1">&le;1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-								</select>
-							</div>
-							<button type="button" class="btn btn-outline-danger" onClick="qn3()">Next</button>
-						</div>
-						<div class="card-body" id="qn4" style="display: none">
-							<h5 class="card-title">Question 4/7</h5>
-							<p class="card-text">Where do you live? Please enter your postal code:</p>
-							<input type="text" class="form-control">
-							<button type="button" class="btn btn-outline-danger" onClick="qn4()">Next</button>
-						</div>
-						<div class="card-body" id="qn5" style="display: none">
-							<h5 class="card-title">Question 5/7</h5>
-							<p class="card-text">What is the maximum distance you can accept?</p>
-							<div class="input-group my-4">
-								<select class="custom-select" id="distanceSelector">
-									<option selected>Choose...</option>
-									<option value="2">&le;2</option>
-									<option value="5">5</option>
-									<option value="10">10</option>
-									<option value="15">15</option>
-									<option value="20">20</option>
-									<option value="20+">&ge;20</option>
-								</select>
-								<div class="input-group-append">
-									<label class="input-group-text" for="fee">km</label>
+								<div class="form-check">
+								<input class="form-check-input" type="radio" name="Singaporean" value="No" id="sg-no">
+								<label class="form-check-label" for="sg-no">No</label>
 								</div>
+								<div style="padding-top: 15%"><button type="button" class="btn btn-outline-danger" onClick="qn1()">Next</button></div>
 							</div>
-							<button type="button" class="btn btn-outline-danger" onClick="qn5()">Next</button>
-						</div>
-					  	<div class="card-body" id="qn6" style="display: none">
-							<h5 class="card-title">Question 6/7</h5>
-							<p class="card-text">How much tuition fee would you accept?</p>
-							<div class="input-group my-4">
-								<select class="custom-select" id="feeSelector">
-									<option selected>Choose...</option>
-									<option value="1000">&lt;1000</option>
-									<option value="1500">1000-1500</option>
-									<option value="2000">1500-2000</option>
-									<option value="2500">2000-2500</option>
-									<option value="3000">2500-3000</option>
-									<option value="3000+">&ge;3000</option>
-								</select>
-								<div class="input-group-append">
-									<label class="input-group-text" for="fee">SGD/Year</label>
+							<div class="card-body" id="qn2" style="display: none">
+								<h5 class="card-title">Question 2/7</h5>
+								<p class="card-text">Do you prefer SPARK certified schools?</p>
+<!--
+								<input type="button" value="Yes" class="btn btn-outline-danger" onClick="qn2()">
+								<input type="button" value="No" class="btn btn-outline-danger" onClick="qn2()">
+-->
+								<div class="form-check">
+								<input class="form-check-input" type="radio" name="SPARK" value="Yes" id="spark-yes">
+								<label class="form-check-label" for="spark-yes">Yes</label>
 								</div>
+								<div class="form-check">
+								<input class="form-check-input" type="radio" name="SPARK" value="No" id="spark-no">
+								<label class="form-check-label" for="spark-no">No</label>
+								</div>
+								<div style="padding-top: 15%"><button type="button" class="btn btn-outline-danger" onClick="qn2()">Next</button></div>
 							</div>
-							<button type="button" class="btn btn-outline-danger" onClick="qn6()">Next</button>
-						</div>
-					  	<div class="card-body" id="qn7" style="display: none">
-							<h5 class="card-title">Question 7/7</h5>
-							<p class="card-text">What is your desired secondary language?</p>
-							<div class="input-group my-4">
-								<select class="custom-select" id="languageSelector">
-									<option selected>Choose...</option>
-									<option value="cn">Chinese</option>
-									<option value="my">Malay</option>
-									<option value="tm">Tamil</option>
-									<option value="hcn">Higher Chinese</option>
-									<option value="hmy">Higher Malay</option>
-									<option value="htm">Higher Tamil</option>
-								</select>
+							<div class="card-body" id="qn3" style="display: none">
+								<h5 class="card-title">Question 3/7</h5>
+								<p class="card-text">How old is your child?</p>
+								<div class="input-group my-4">
+									<div class="input-group-prepend">
+										<label class="input-group-text" for="age">Age</label>
+									</div>
+									<select class="custom-select" id="age" name="age">
+										<option selected>Choose...</option>
+										<option value="1">&le;1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+									</select>
+								</div>
+								<button type="button" class="btn btn-outline-danger" onClick="qn3()">Next</button>
 							</div>
-							<button type="submit" class="btn btn-outline-danger" onClick="qn7()">Submit</button>
+							<div class="card-body" id="qn4" style="display: none">
+								<h5 class="card-title">Question 4/7</h5>
+								<p class="card-text">Where do you live? Please enter your postal code:</p>
+								<input type="text" name="adr" value="000000" class="form-control">
+								<button type="button" class="btn btn-outline-danger" onClick="qn4()">Next</button>
+							</div>
+							<div class="card-body" id="qn5" style="display: none">
+								<h5 class="card-title">Question 5/7</h5>
+								<p class="card-text">What is the maximum distance you can accept?</p>
+								<div class="input-group my-4">
+									<select class="custom-select" id="distance" name="distance">
+										<option selected>Choose...</option>
+										<option value="2">&le;2</option>
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="20+">&ge;20</option>
+									</select>
+									<div class="input-group-append">
+										<label class="input-group-text" for="distance">km</label>
+									</div>
+								</div>
+								<button type="button" class="btn btn-outline-danger" onClick="qn5()">Next</button>
+							</div>
+							<div class="card-body" id="qn6" style="display: none">
+								<h5 class="card-title">Question 6/7</h5>
+								<p class="card-text">How much tuition fee would you accept?</p>
+								<div class="input-group my-4">
+									<select class="custom-select" id="fee" name="fee">
+										<option selected>Choose...</option>
+										<option value="150">&lt;150</option>
+										<option value="250">150-200</option>
+										<option value="300">200-300</option>
+										<option value="400">300-400</option>
+										<option value="500">400-500</option>
+										<option value="600">500-600</option>
+										<option value="600+">&ge;600</option>
+									</select>
+									<div class="input-group-append">
+										<label class="input-group-text" for="fee">SGD/Year</label>
+									</div>
+								</div>
+								<button type="button" class="btn btn-outline-danger" onClick="qn6()">Next</button>
+							</div>
+							<div class="card-body" id="qn7" style="display: none">
+								<h5 class="card-title">Question 7/7</h5>
+								<p class="card-text">What is your desired secondary language?</p>
+								<div class="input-group my-4">
+									<select class="custom-select" id="language" name="language">
+										<option selected>Choose...</option>
+										<option value="cn">Chinese</option>
+										<option value="my">Malay</option>
+										<option value="tm">Tamil</option>
+										<option value="none">None</option>
+									</select>
+								</div>
+								<button type="submit" class="btn btn-outline-danger" onClick="qn7()">Submit</button>
+							</div>
 						</div>
-                          {% csrf_token %}
-                      </form>
-					</div>
+					</form>
 				</div> 
 			</div>
 		</div>
