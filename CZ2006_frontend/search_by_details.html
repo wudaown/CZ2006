@@ -26,17 +26,20 @@
 				padding: 1rem 0 0 0;
 			}
 			.header{
-				text-align: center;	
 				background: linear-gradient(to bottom right, rgba(0,47,75,0.6), rgba(220,66,37,0.6)), url("2.jpg");
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
-				padding: 20vh 0;
+				padding: 20vh 0 5vh 0;
 			}
 			h1{
 				font-weight: normal;
 				color: white;
-				margin: auto;
+			}
+			.search-container{
+				background-color: #F8F8F8;
+				border:thick;
+				border: 1px solid rgba(0, 0, 0, 0.125);
 			}
 			.card-body{
 				padding: 0.5rem 1.25rem;
@@ -152,11 +155,9 @@
 		<div class="container-fluid">
 			<!-- Header -->
 			<div class="row header">
+				<div class="container">
 				<h1>Search by details</h1>
-			</div>
-			<!-- Search parameters -->
-			<div class="row main-row">
-				<div class="container-fluid">
+					<div class="container search-container">
 					<div class="row" style="margin: auto">
 						<form method="post" style="margin: auto;">
 							<div class="row search-row">
@@ -248,10 +249,15 @@
 							<div class="row search-row text-center">
 								<div class="card-body" style="margin:auto;"><button type="submit" class="btn btn-danger"><i class="fa fa-filter">&nbsp;</i> Apply filter</button></div>
 							</div>
-							<hr>
 						</form>
 					</div>
 				</div>
+				</div>
+				
+			</div>
+			<!-- Search parameters -->
+			<div class="row main-row">
+				
 			</div>
 			<!-- Search result scholl list -->
 			<div class="row main-row">
