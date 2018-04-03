@@ -62,14 +62,14 @@ class LoginView(View):
             user = authenticate(username=username, password=passwd)
             if user is not None:
                 login(request, user)
-                # request.session['member_id'] = username
+                request.session['member_id'] = username
                 # u = request.user.username
                 # return HttpResponseRedirect('login.html')
                 # return render(request, 'index.html')
                 #  a = checkMailbox(user)
                 # return render(request, 'user_page.html')
                 # a = checkMailbox(user)
-
+                #
                 # return redirect('/users/' + username)
                 # if not user.is_superuser:
                 # 	a = checkMailbox(user, isviewed=False)

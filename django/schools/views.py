@@ -13,12 +13,12 @@ import json
 import re
 
 def advanced_search(request):
-	if request.method == 'GET':
-		return render(request, 'advaned.html')
-	if request.method == 'POST':
-		p_school = request.POST.get('school_key')
-		target = fuzzy_filter(p_school, Kindergarten.objects.all())
-		return render(request, 'advaned.html', {'user_list': target})
+    if request.method == 'GET':
+        return render(request, 'advaned.html')
+    if request.method == 'POST':
+        p_school = request.POST.get('school_key')
+        target = fuzzy_filter(p_school, Kindergarten.objects.all())
+        return render(request, 'advaned.html', {'user_list': target})
 
 
 def guided_search(request):
@@ -48,9 +48,9 @@ def guided_search(request):
         return render(request, 'search_by_guidance.html', {'user_list': kindergarten})
 
 def selecetMOE(collection):
-	# target_kind = collection.filter(MOE == True)
-	target_kind = collection.filter(type='MOE')
-	return target_kind
+    # target_kind = collection.filter(MOE == True)
+    target_kind = collection.filter(type='MOE')
+    return target_kind
 
 
 
