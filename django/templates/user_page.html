@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"User Page Test"</title>
+</head>
+<body>
+        {{ username }}
+        {% if request.user.is_authenticated %}
+            <h1>Login</h1>
+            {{ followingList }}
+        {% else %}
+            <h1>not login</h1>
+        {% endif %}
+</body>
+</html>

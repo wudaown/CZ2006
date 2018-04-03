@@ -133,6 +133,7 @@ class LogoutView(View):
 		# return render(request, 'index.html')
 
 
+
 # class NotificationCenterView(View):
 # 	# todo 这个和userpageview重合了
 # 	def get(self, request):
