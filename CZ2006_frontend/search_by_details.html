@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Search by Guidance</title>
+		<title>Search by details</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,40 +21,28 @@
 				margin: auto;
 				padding: 1rem 0;
 			}
-			.search-row{
-				padding: 1.25rem;
-			}
 			.sch-row{
 				margin: auto;	
 				padding: 1rem 0 0 0;
 			}
 			.header{
-				padding:5vh 0 0 0;
 				text-align: center;	
+				background: linear-gradient(to bottom right, rgba(0,47,75,0.6), rgba(220,66,37,0.6)), url("2.jpg");
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				padding: 20vh 0;
 			}
 			h1{
 				font-weight: normal;
-				color: #CA1632;
+				color: white;
 				margin: auto;
-			}
-			.card{
-				width: inherit;
-				min-width: 300px;
-				height: 100%;
-				margin: auto;
-				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			}
 			.card-body{
 				padding: 0.5rem 1.25rem;
 			}
-			.card-body input, .input-group{
-				max-width: 300px;
-			}
 			.card-text{
 				margin: 0;
-			}
-			.search-card{
-				max-width: 1200px;
 			}
 			.sch-card{
 				width: 80vw;
@@ -71,7 +59,8 @@
 			}
 			.btn-mybtn{
 				background-color: transparent!important;
-				padding: 0 1.25rem 0 0;
+				padding: 0;
+				margin-right: 1.25rem;
 			}
 
 			html {
@@ -161,15 +150,15 @@
 		
 		<!-- Body -->
 		<div class="container-fluid">
-			<div class="row">
-				<h1 class="header">Search by details</h1>
+			<!-- Header -->
+			<div class="row header">
+				<h1>Search by details</h1>
 			</div>
 			<!-- Search parameters -->
 			<div class="row main-row">
-				<div class="card border-light search-card" style="width: 90vw;">
-					<div class="container">
-						<div class="row" style="margin: auto">
-							<form method="post">
+				<div class="container-fluid">
+					<div class="row" style="margin: auto">
+						<form method="post" style="margin: auto;">
 							<div class="row search-row">
 								<div class="card-body">
 									<p class="card-text" id="question">Citizenship</p>
@@ -193,7 +182,6 @@
 											<option value="7">7</option>
 										</select>
 									</div>
-
 								</div>
 								<div class="card-body">
 									<p class="card-text">Your address (zip code)</p>
@@ -257,17 +245,18 @@
 									</div>
 								</div>
 							</div>
-							<div class="row search-row">
-								<div class="card-body" style="margin:auto;"><button type="submit" class="btn btn-outline-danger">Search</button></div>
+							<div class="row search-row text-center">
+								<div class="card-body" style="margin:auto;"><button type="submit" class="btn btn-danger"><i class="fa fa-filter">&nbsp;</i> Apply filter</button></div>
 							</div>
+							<hr>
 						</form>
-						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Search result scholl list -->
 			<div class="row main-row">
-				<div class="container">
+				<div class="container sch-container">
+					<p class="text-center">Click on school names for more information.</p>
 					<div class="row sch-row">
 						<div class="sch-card">
 							<table class="table table-bordered table-sm">
