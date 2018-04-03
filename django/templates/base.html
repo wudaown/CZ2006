@@ -39,7 +39,7 @@
 </nav>
 {% else %}
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
-    <a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+    <a class="navbar-brand" href="{% url 'index' %}">SchoolFinder.com</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -64,7 +64,7 @@
                     <a class="dropdown-item" href="favorite_school.html"><i class="fa fa-heart-o">&nbsp;</i>Favorite schools</a>
                     <a class="dropdown-item" href="#"><i class="fa fa-bell-o">&nbsp;</i>Notifications &nbsp;<div class="badge badge-pill badge-warning" style="float: right">3</div></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
+                    <a class="dropdown-item" href={% url 'logout' %}><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
                 </div>
             </li>
         </ul>
@@ -144,6 +144,10 @@
 {% block searchMethod %}
 {% endblock %}
 {% block profileblock %}
+{% endblock %}
+{% block favscl %}
+{% endblock %}
+{% block js %}
 {% endblock %}
 
 <!-- Copyright -->

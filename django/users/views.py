@@ -71,8 +71,8 @@ class LoginView(View):
                 # a = checkMailbox(user)
                 #
                 # return redirect('/users/' + username)
-                # if not user.is_superuser:
-                # 	a = checkMailbox(user, isviewed=False)
+                if not user.is_superuser:
+                	a = checkMailbox(user, isviewed=False)
                 return HttpResponseRedirect(reverse('index'))
             else:
                 msg = {'msg': 'Username or Password Wrong'}
@@ -163,12 +163,18 @@ class UserPageView(View):
         unread = checkMailbox(user, isviewed=False)
         flist = user.following.all()
         if user is not None:
-            return render(request, 'user_page.html',
-                          {'username': username, 'read_message_list': read,
-                           'followingList': flist, 'unread_message_list':unread})
+            return render(request, 'user_profile.html',
+                          {'username': username, 'email': user.email})
         else:
             return HttpResponse("Wrong username")
 
+class FavSch(View):
+    def get(self, request):
+        fav_list = request.user.following.all()
+        return render(request, 'favorite_school.html')
+    
+    def post(self, request):
+        return render(request, 'favorite_school.html')
 
 def checkMailbox(user, isviewed):
     mailbox = user.mailbox
@@ -207,16 +213,30 @@ def getschoolfollower(school):
     output = template.render(variables)
     return HttpResponse(output)'''
 
-
-def saveToList(request, id):
-    user = User.objects.get(username=request.session['member_id'])
-    if user is not None:
-        school = Kindergarten.objects.get(id=id)
+def saveToList(request, pk):
+    try:
+        user = User.objects.get(username=request.session['member_id'])
+    except:
+        # print('here')
+        return render(request, 'login.html')
+    school = Kindergarten.objects.get(id=pk)
+    if school in user.following.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
         user.following.add(school)
         user.save()
-        return HttpResponse("<script>Save.Response_OK();</script>")
-    else:
-        return render(request, 'login.html')
+        # print('ok')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+# def saveToList(request, id):
+#     user = User.objects.get(username=request.session['member_id'])
+#     if user is not None:
+#         school = Kindergarten.objects.get(id=id)
+#         user.following.add(school)
+#         user.save()
+#         return HttpResponse("<script>Save.Response_OK();</script>")
+#     else:
+#         return render(request, 'login.html')
 
 
 '''
