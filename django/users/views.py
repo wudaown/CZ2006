@@ -133,7 +133,7 @@ class LogoutView(View):
 		# return render(request, 'index.html')
 
 
-class NotificationCenterView(View):
+'''class NotificationCenterView(View):
 	# todo 这个和userpageview重合了
 	def get(self, request):
 		user = request.user
@@ -142,7 +142,7 @@ class NotificationCenterView(View):
 		for qs in messages:
 			output.add(qs.message.content)
 		return output
-
+'''
 
 class ForgetPasswordView(View):
 	# TODO
