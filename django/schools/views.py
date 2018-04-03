@@ -13,12 +13,12 @@ import json
 import re
 
 def advanced_search(request):
-    if request.method == 'GET':
-        return render(request, 'advaned.html')
-    if request.method == 'POST':
-        p_school = request.POST.get('school_key')
-        target = fuzzy_filter(p_school, Kindergarten.objects.all())
-        return render(request, 'advaned.html', {'user_list': target})
+	if request.method == 'GET':
+		return render(request, 'advaned.html')
+	if request.method == 'POST':
+		p_school = request.POST.get('school_key')
+		target = fuzzy_filter(p_school, Kindergarten.objects.all())
+		return render(request, 'advaned.html', {'user_list': target})
 
 
 def guided_search(request):
@@ -26,38 +26,42 @@ def guided_search(request):
 		return render(request, 'search_by_details.html')
 	if request.method == 'POST':
 		p_sg = request.POST.get('citizenship')
-		# print(p_sg)
+		print(p_sg)
 		p_certificate = request.POST.get('SPARK')
-		# print(p_certificate)
+		print(p_certificate)
 		p_year = request.POST.get('age')
-		# print(p_year)
+		print(p_year)
 		p_post = request.POST.get('adr')
-		# print(p_post)
+		print(p_post)
 		p_dis = request.POST.get('distance')
-		# print(p_dis)
+		print(p_dis)
 		p_price = request.POST.get('fee')
-		# print(p_price)
+		print(p_price)
 		p_second = request.POST.get('language')
-		# print(p_second)
+		print(p_second)
 		# if p_second == 'ch':
 		# 	print(1)
 		kindergarten = Kindergarten.objects.all()
 
 		k2 = False
+        #Todo: Does not handle NULL input [faceplam]
+        #Todo:Not all singaporean must go to moe schools [facepalm], and no moe schools in database so far, only daxiongdi have
 		if p_sg.upper() == 'SINGAPOREAN' or p_sg.upper == 'S':
 			kindergarten = selecetMOE(kindergarten)
+		print(kindergarten)
 		if int(p_year) <= 6 or int(p_year) >= 5:
 			k2 = True
 		kindergarten = year_kindergarten(k2, kindergarten)
 		if p_certificate.upper() == 'YES' or p_certificate.upper() == 'Y':
 			kindergarten = selecetSPARK(kindergarten)
+		print(kindergarten)
 		kindergarten = price_select(str(p_price), kindergarten, k2)
 		kindergarten = language_select(p_second, kindergarten)
 		kindergarten = distant_selection(p_dis, p_post,kindergarten)
 		# for i in kindergarten:
 		# 	print(i.name, i.postalcode, i.type, i.email, i.language)
 
-		# # print(kindergarten)
+		print(kindergarten)
 		# # # return render(request, 'search_by_details.html', {'user_list': kindergarten})
 		return render(request, 'search_by_details.html', {'kindergarten': kindergarten})
 		# return render(request, 'search_by_details.html')
@@ -87,21 +91,21 @@ def selecetMOE(collection):
 
 
 def year_kindergarten(K2, collection):
-    # target_kind = []
-    # if K2:
-    #     for i in collection:
-    #         if collection.K2_capacity > 0:
-    #             target_kind.insert(i)
-    # else:
-    #     for i in collection:
-    #         if collection.K1_capacity > 0:
-    #             target_kind.insert(i)
-    # return target_kind
-    if K2:
-        target_kind = collection.filter(k2_capacity__gt=0)
-    else:
-        target_kind = collection.filter(k1_capacity__gt=0)
-    return target_kind
+	# target_kind = []
+	# if K2:
+	#     for i in collection:
+	#         if collection.K2_capacity > 0:
+	#             target_kind.insert(i)
+	# else:
+	#     for i in collection:
+	#         if collection.K1_capacity > 0:
+	#             target_kind.insert(i)
+	# return target_kind
+	if K2:
+		target_kind = collection.filter(k2_capacity__gt=0)
+	else:
+		target_kind = collection.filter(k1_capacity__gt=0)
+	return target_kind
 
 
 def price_select(price, collection, k2):
@@ -237,33 +241,33 @@ def selecetSPARK(collection):
 
 
 def calculatedistance(zip_home, zip_school):
-    query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
-    query = query.replace("home", str(zip_home))
-    query = query.replace("school", str(zip_school))
-    with urllib.request.urlopen(query) as url:
-        data = json.loads(url.read().decode())
-        dist = data['routes'][0]['legs'][0]['distance']['value']
-        return dist
+	query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
+	query = query.replace("home", str(zip_home))
+	query = query.replace("school", str(zip_school))
+	with urllib.request.urlopen(query) as url:
+		data = json.loads(url.read().decode())
+		dist = data['routes'][0]['legs'][0]['distance']['value']
+		return dist
 
 
 def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+	response = "You're looking at the results of question %s."
+	return HttpResponse(response % question_id)
 
 
 def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+	return HttpResponse("You're voting on question %s." % question_id)
 
 
 def fuzzy_filter(user_input, collection):
-    suggestions = []
-    pattern = '.*'.join(user_input)
-    regex = re.compile(pattern)
-    for item in collection:
-        match = regex.search(item)
-        if match:
-            suggestions.append(item)
-    return suggestions
+	suggestions = []
+	pattern = '.*'.join(user_input)
+	regex = re.compile(pattern)
+	for item in collection:
+		match = regex.search(item)
+		if match:
+			suggestions.append(item)
+	return suggestions
 
 
 class SchoolListView(View):
