@@ -5,7 +5,7 @@ from users.models import User
 from schools.models import Kindergarten
 
 
-def add(request,id):
+def add(request):
 	try:
 		u = User.objects.get(username=request.session['member_id'])
 	except:
@@ -16,7 +16,7 @@ def add(request,id):
 		'Cannot add to compare because there are already 3 schools in compare.'})
 
 	try:
-		s = Kindergarten.objects.get(id=id) # TODO
+		s = request.POST.get('kindergarten_key') # TODO
 		relation = CompareList(user=u, school=s)
 		relation.save()
 		return render(request, 'compare_modify.html', {'msg': 'Add to compare list succeeded.'})
@@ -24,13 +24,13 @@ def add(request,id):
 		return render(request, 'compare_modify.html', {'msg': 'Add to compare list failed.'})
 
 
-def remove(request,id):
+def remove(request):
 	try:
 		u = User.objects.get(username=request.session['member_id'])
 	except:
 		return render(request, 'login.html')
 
-	s = Kindergarten.objects.get(id=id) # TODO
+	s = request.POST.get('kindergarten_key') # TODO
 	CompareList.objects.filter(user=u, school=s).delete()
 	return render(request, 'compare_modify.html', {'msg': '%s deleted from %s\'s compare list'.format(s, u)})
 

@@ -133,15 +133,16 @@ class LogoutView(View):
 		# return render(request, 'index.html')
 
 
-class NotificationCenterView(View):
-	# todo 这个和userpageview重合了
-	def get(self, request):
-		user = request.user
-		output = set()
-		messages = Message_Mailbox.objects.filter(mailbox_id=user.mailbox_id)
-		for qs in messages:
-			output.add(qs.message.content)
-		return output
+
+# class NotificationCenterView(View):
+# 	# todo 这个和userpageview重合了
+# 	def get(self, request):
+# 		user = request.user
+# 		output = set()
+# 		messages = Message_Mailbox.objects.filter(mailbox_id=user.mailbox_id)
+# 		for qs in messages:
+# 			output.add(qs.message.content)
+# 		return output
 
 
 class ForgetPasswordView(View):
@@ -173,16 +174,16 @@ def checkMailbox(user, isviewed):
 	output = set()
 	unread_messages = Message_Mailbox.objects.filter(mailbox_id=mailbox.id, viewed=isviewed)
 	for qs in unread_messages:
-		output.add([User.objects.get(id=qs.message.from_id).username, qs.message.content])
+		output.add(qs.message.content)
 		qs.viewed = True
 		qs.save()
 	return output
 
 
-def notifyUser(sender, userlist, message):
-	msg = Message.objects.create(from_id=sender.id, content=message)
+def notifyUser(userlist, msg):
+	#msg = Message.objects.create(content=message)
 	for user in userlist:
-		user.mailbox.objects.add(msg)
+		Message_Mailbox.objects.create(mailbox = user.mailbox, message = msg)
 	return
 
 
