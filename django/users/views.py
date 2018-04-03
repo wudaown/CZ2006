@@ -177,6 +177,16 @@ class FavSch(View):
         return render(request, 'favorite_school.html')
 
 def checkMailbox(user, isviewed):
+    """
+        Check a users mail box for read/unread messages
+
+        Args:
+            user: A user object.
+            isviewed: A boolean; True if read message is required.
+
+        Returns:
+            output: A set contains all messages required
+     """
     mailbox = user.mailbox
     output = set()
     unread_messages = Message_Mailbox.objects.filter(mailbox_id=mailbox.id, viewed=isviewed)
@@ -188,6 +198,16 @@ def checkMailbox(user, isviewed):
 
 
 def notifyUser(userlist, msg):
+    """
+        Notify all user in the userlist by sending the msg to their mailboxes.
+
+        Args:
+            userlist: A list contains some users.
+            msg: A message to be sent to them.
+
+        Returns:
+            None
+    """
     #msg = Message.objects.create(content=message)
     for user in userlist:
         Message_Mailbox.objects.create(mailbox = user.mailbox, message = msg)
