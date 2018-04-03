@@ -4,9 +4,8 @@
 		<meta charset="UTF-8">
 		<title>Search by Guidance</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="css/index.css">
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="node_modules/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
 			.modal-header,h6,.close{
 				background-color: #ca1632;
@@ -17,8 +16,17 @@
 			.modal-footer{
 				background-color: #f9f9f9;
 				}
-			.row{
-				margin: 2vw;
+
+			.main-row{
+				margin: auto;
+				padding: 1rem 0;
+			}
+			.search-row{
+				padding: 1.25rem;
+			}
+			.sch-row{
+				margin: auto;	
+				padding: 1rem 0 0 0;
 			}
 			.header{
 				padding:5vh 0 0 0;
@@ -36,6 +44,36 @@
 				margin: auto;
 				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			}
+			.card-body{
+				padding: 0.5rem 1.25rem;
+			}
+			.card-body input, .input-group{
+				max-width: 300px;
+			}
+			.card-text{
+				margin: 0;
+			}
+			.search-card{
+				max-width: 1200px;
+			}
+			.sch-card{
+				width: 80vw;
+				min-width: 300px;
+				max-width: 800px;
+				margin: auto;
+			}
+			.sch-card-name{
+				background-color: #F8F8F8;
+			}
+			.sch-card-btns{
+				margin: auto;
+				margin-right: 0;
+			}
+			.btn-mybtn{
+				background-color: transparent!important;
+				padding: 0 1.25rem 0 0;
+			}
+
 			html {
 				  height: 100%;
 				  box-sizing: border-box;
@@ -126,104 +164,184 @@
 			<div class="row">
 				<h1 class="header">Search by details</h1>
 			</div>
-			<div class="row">
-				<div class="col">
-					<div class="card border-light">
+			<!-- Search parameters -->
+			<div class="row main-row">
+				<div class="card border-light search-card" style="width: 90vw;">
+					<div class="container">
 						<div class="row" style="margin: auto">
 							<form method="post">
-								<div class="row">
-									<div class="card-body">
-										<p class="card-text" id="question">Citizenship</p>
-										<select class="custom-select" id="citizenship" name="citizenship">
+							<div class="row search-row">
+								<div class="card-body">
+									<p class="card-text" id="question">Citizenship</p>
+									<select class="custom-select" id="citizenship" name="citizenship">
+										<option selected>Choose...</option>
+										<option value="singaporean">Singaporean</option>
+										<option value="non-singaporean">Non-Singaporean</option>
+									</select>
+								</div>
+								<div class="card-body">
+									<p class="card-text">Age</p>
+									<div class="input-group">
+										<select class="custom-select" id="age" name="age">
 											<option selected>Choose...</option>
-											<option value="singaporean">Singaporean</option>
-											<option value="non-singaporean">Non-Singaporean</option>
+											<option value="1">&le;1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
 										</select>
 									</div>
-									<div class="card-body">
-										<p class="card-text">Age</p>
-										<div class="input-group">
-											<select class="custom-select" id="age" name="age">
-												<option selected>Choose...</option>
-												<option value="1">&le;1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-												<option value="6">6</option>
-												<option value="7">7</option>
-											</select>
-										</div>
 
-									</div>
-									<div class="card-body">
-										<p class="card-text">Your address (zip code)</p>
-										<input type="text" name="adr" value="000000" class="form-control">
-									</div>
-									<div class="card-body" id="dist">
-										<p class="card-text">Distance</p>
-										<div class="input-group">
-											<select class="custom-select" id="distance" name="distance">
-												<option selected>Choose...</option>
-												<option value="2">&le;2</option>
-												<option value="5">2-5</option>
-												<option value="10">5-10</option>
-												<option value="15">10-15</option>
-												<option value="20">15-20</option>
-												<option value="20+">&ge;20</option>
-											</select>
-											<div class="input-group-append">
-												<label class="input-group-text" for="distance">km</label>
-											</div>
-										</div>
-									</div>
-									<div class="card-body">
-										<p class="card-text">Fee</p>
-										<div class="input-group">
-											<select class="custom-select" id="fee" name="fee">
-												<option selected>Choose...</option>
-												<option value="150">&lt;150</option>
-												<option value="200">150-200</option>
-												<option value="300">200-300</option>
-												<option value="400">300-400</option>
-												<option value="500">400-500</option>
-												<option value="600">500-600</option>
-												<option value="600+">&ge;600</option>
-											</select>
-											<div class="input-group-append">
-												<label class="input-group-text" for="fee">SGD/Year</label>
-											</div>
-										</div>
-									</div>
-									<div class="card-body">
-										<p class="card-text">Secondary language</p>
-										<div class="input-group">
-											<select class="custom-select" id="language" name="language">
-												<option selected>Choose...</option>
-												<option value="cn">Chinese</option>
-												<option value="my">Malay</option>
-												<option value="tm">Tamil</option>
-												<option value="none">None</option>
-											</select>
-										</div>
-									</div>
-									<div class="card-body">
-										<p class="card-text">SPARK certificated</p>
-										<div class="input-group">
-											<select class="custom-select" id="SPARK" name="SPARK">
-												<option selected>Choose...</option>
-												<option value="yes">Yes</option>
-												<option value="no">No</option>
-											</select>
+								</div>
+								<div class="card-body">
+									<p class="card-text">Your address (zip code)</p>
+									<input type="text" name="adr" value="000000" class="form-control">
+								</div>
+								<div class="card-body" id="dist">
+									<p class="card-text">Distance</p>
+									<div class="input-group">
+										<select class="custom-select" id="distance" name="distance">
+											<option selected>Choose...</option>
+											<option value="2">&le;2</option>
+											<option value="5">&le;5</option>
+											<option value="10">&le;10</option>
+											<option value="15">&le;15</option>
+											<option value="20">&le;20</option>
+											<option value="20+">All</option>
+										</select>
+										<div class="input-group-append">
+											<label class="input-group-text" for="distance">km</label>
 										</div>
 									</div>
 								</div>
-								<div class="row"><div class="col" align="center"><button type="submit" class="btn btn-outline-danger my-4">Search</button></div></div>
-							    {% csrf_token %}
-                            </form>
+								<div class="card-body">
+									<p class="card-text">Fee</p>
+									<div class="input-group">
+										<select class="custom-select" id="fee" name="fee">
+											<option selected>Choose...</option>
+											<option value="150">&lt;150</option>
+											<option value="250">150-200</option>
+											<option value="300">200-300</option>
+											<option value="400">300-400</option>
+											<option value="500">400-500</option>
+											<option value="600">500-600</option>
+											<option value="600+">&ge;600</option>
+										</select>
+										<div class="input-group-append">
+											<label class="input-group-text" for="fee">SGD/Year</label>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<p class="card-text">Secondary language</p>
+									<div class="input-group">
+										<select class="custom-select" id="language" name="language">
+											<option selected>Choose...</option>
+											<option value="cn">Chinese</option>
+											<option value="my">Malay</option>
+											<option value="tm">Tamil</option>
+											<option value="none">None</option>
+										</select>
+									</div>
+								</div>
+								<div class="card-body">
+									<p class="card-text">SPARK certificated</p>
+									<div class="input-group">
+										<select class="custom-select d-inline" id="SPARK" name="SPARK">
+											<option selected>Choose...</option>
+											<option value="yes">Yes</option>
+											<option value="no">No</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row search-row">
+								<div class="card-body" style="margin:auto;"><button type="submit" class="btn btn-outline-danger">Search</button></div>
+							</div>
+						</form>
 						</div>
 					</div>
-				</div> 
+				</div>
+			</div>
+			<!-- Search result scholl list -->
+			<div class="row main-row">
+				<div class="container">
+					<div class="row sch-row">
+						<div class="sch-card">
+							<table class="table table-bordered table-sm">
+								<thead>
+									<tr class="sch-card-name">
+										<th scope="row" colspan="2">
+											<div class="container">
+												<div class="row">
+													<a href="school_detail.html">School Name</a>
+													<div class="sch-card-btns">
+														<button type="button" class="btn btn-mybtn" onClick="fav-toggle()"><i class="fa fa-heart" style="color: #CA1632;"></i></button>
+														<button tyep="button" class="btn btn-mybtn" onClick="add-comp()"><i class="fa fa-plus" style="color: #007BFF"></i></button>
+														<button type="button" class="btn btn-light" onClick="comp-add()" style="display: none"><i class="fa fa-check" style="color: #007BFF"></i></button>
+													</div>	
+												</div>
+											</div>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>Email</th>
+										<td>schoolemail@example.com</td>
+									</tr>
+									<tr>
+										<th>Contact Number</th>
+										<td>12345678</td>
+									</tr>
+									<tr>
+										<th>Address</th>
+										<td colspan="3">This is an address line</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row sch-row">
+						<div class="sch-card">
+							<table class="table table-bordered table-sm">
+								<thead>
+									<tr class="sch-card-name">
+										<th scope="row" colspan="2">
+											<div class="container">
+												<div class="row">
+													<a href="school_detail.html">School Name</a>
+													<div class="sch-card-btns">
+														<button type="button" class="btn btn-mybtn" onClick="fav-toggle()"><i class="fa fa-heart" style="color: #CA1632;"></i></button>
+														<button tyep="button" class="btn btn-mybtn" onClick="add-comp()"><i class="fa fa-plus" style="color: #007BFF"></i></button>
+														<button type="button" class="btn btn-light" onClick="comp-add()" style="display: none"><i class="fa fa-check" style="color: #007BFF"></i></button>
+													</div>	
+												</div>
+											</div>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>Email</th>
+										<td>schoolemail@example.com</td>
+									</tr>
+									<tr>
+										<th>Contact Number</th>
+										<td>12345678</td>
+									</tr>
+									<tr>
+										<th>Address</th>
+										<td colspan="3">This is an address line</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		

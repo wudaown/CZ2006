@@ -1,10 +1,310 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Notifications</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Favorite School</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.modal-header,h6,.close{
+				text-align:center;
+				font-size: 30px;
+				color: white !important;
+				background-color: #007BFF;
+			}
+			.modal-footer{
+				background-color: #f9f9f9;
+				}
+			.header{
+				padding:5vh 0 0 0;
+				text-align: center;	
+			}
+			.nav-link{
+				color: #CA1632;
+			}
+			.nav-link:hover{
+				color: #800D1F;
+			}
+			.card{
+				width: 100%;
+				min-width: 450px;
+			}
+			.card-body{
+				width: 100%;
+			}
+			.main-card{
+				width: 80vw;
+				min-width: 450px;
+				max-width: 800px;
+				height: 100%;
+				min-height: 80vh;
+				margin: auto;
+				top: 3vh;
+				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			}
+			.sch-card{
+				width: 80vw;
+				min-width: 300px;
+				max-width: 800px;
+				margin: 0 1.25rem;
+			}
+			.sch-card-name{
+				background-color: #F8F8F8;
+			}
+			.sch-card-btns{
+				margin: auto;
+				margin-right: 0;
+			}
+			.btn-mybtn{
+				background-color: transparent!important;
+				padding: 0 1.25rem 0 0;
+			}
+			
+			h5{
+				margin: auto;
+			}
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
 
-<body>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown" style="padding-right: 15px;">
+						<a class="nav-link dropdown-toggle" href="#" id="search" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+						</a>
+						<div class="dropdown-menu" aria-labelledby="searchDropdown">
+							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+							<a class="dropdown-item" href="search_by_details.html">By school details</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="myAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o">&nbsp;</i>My account <div class="badge badge-pill badge-warning">3</div>
+						</a>
+						<div class="dropdown-menu" style="right: 0; left: auto" aria-labelledby="myAccountDropdown">
+							<div class="dropdown-header">username@example.com</div>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="user_profile.html"><i class="fa fa-user-circle-o">&nbsp;</i>My profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="favorite_shcool.html"><i class="fa fa-heart-o">&nbsp;</i>Favorite schools</a>
+							<a class="dropdown-item" href="notificaiton.html"><i class="fa fa-bell-o">&nbsp;</i>Notifications &nbsp;<div class="badge badge-pill badge-warning" style="float: right">3</div></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#"><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
+						</div>	
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- Body -->
+		<div class="container-fluid" style="height: 100%">
+			<div class="card main-card">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" id="fav-sch-tab" href="#fav-sch" role="tab" >Favorite Schools</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" id="notif-tab" href="#notif" role="tab">Notifications&nbsp;<div class="badge badge-pill badge-warning">3</div></a>
+						</li>
+					</ul>
+				</div>
+				<div class="card-body">
+  			 		<div class="tab-content" id="myTabContent">
+						<!-- favorite school list -->
+             			<div class="tab-pane fade" id="fav-sch" role="tabpanel">
+								<div class="row">
+									<div class="sch-card">
+									<table class="table table-bordered table-sm">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row" colspan="2">
+													<div class="container">
+														<div class="row">
+															<a href="school_detail.html">School Name</a>
+															<div class="sch-card-btns">
+																<button type="button" class="btn btn-mybtn" onClick="fav-toggle()"><i class="fa fa-heart" style="color: #CA1632;"></i></button>
+																<button tyep="button" class="btn btn-mybtn" onClick="add-comp()"><i class="fa fa-plus" style="color: #007BFF"></i></button>
+																<button type="button" class="btn btn-light" onClick="comp-add()" style="display: none"><i class="fa fa-check" style="color: #007BFF"></i></button>
+															</div>	
+														</div>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>Email</th>
+												<td>schoolemail@example.com</td>
+											</tr>
+											<tr>
+												<th>Contact Number</th>
+												<td>12345678</td>
+											</tr>
+											<tr>
+												<th>Address</th>
+												<td colspan="3">This is an address line</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+									<div class="sch-card">
+									<table class="table table-bordered table-sm">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row" colspan="2">
+													<div class="container">
+														<div class="row">
+															<a href="school_detail.html">School Name</a>
+															<div class="sch-card-btns">
+																<button type="button" class="btn btn-mybtn" onClick="fav-toggle()"><i class="fa fa-heart" style="color: #CA1632;"></i></button>
+																<button tyep="button" class="btn btn-mybtn" onClick="add-comp()"><i class="fa fa-plus" style="color: #007BFF"></i></button>
+																<button type="button" class="btn btn-light" onClick="comp-add()" style="display: none"><i class="fa fa-check" style="color: #007BFF"></i></button>
+															</div>	
+														</div>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>Email</th>
+												<td>schoolemail@example.com</td>
+											</tr>
+											<tr>
+												<th>Contact Number</th>
+												<td>12345678</td>
+											</tr>
+											<tr>
+												<th>Address</th>
+												<td colspan="3">This is an address line</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								</div>
+						</div>
+						<!-- notification -->
+  						<div class="tab-pane fade show active" id="notif" role="tabpanel">
+							<div class="row">
+								<div class="sch-card">
+									<table class="table table-bordered">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row">
+													<a href="school_detail.html"><div class="badge badge-pill badge-warning">New</div>School Name</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>This is a notification message.</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="sch-card">
+									<table class="table table-bordered">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row">
+													<a href="school_detail.html"><div class="badge badge-pill badge-warning">New</div>School Name</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>This is a notification message.</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="sch-card">
+									<table class="table table-bordered">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row">
+													<a href="school_detail.html"><div class="badge badge-pill badge-warning">New</div>School Name</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>This is a notification message.</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="sch-card">
+									<table class="table table-bordered">
+										<thead>
+											<tr class="sch-card-name">
+												<th scope="row">
+													<a href="school_detail.html">School Name</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>This is a notification message.</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+        			</div>
+				</div>
+			</div>
+		</div>
+	<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			&copy; 2018 TEAM UNDEFINED
+		</div>
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<script>
+			function fav-toggle(){
+				var btn = document.getElementById("fav-btn");
+				if (btn.class = "fa fa-heart"){
+					btn.class = "fa fa-heart-o";
+					// & remove this school from favorite list
+				}
+				if (btn.class = "fa fa-heart-o"){
+					btn.class = "fa fa-heart";
+					// & add this school to favorite list
+				}
+			}
+		</script>
 </body>
 </html>
