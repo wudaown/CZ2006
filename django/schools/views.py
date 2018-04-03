@@ -22,7 +22,6 @@ def advanced_search(request):
 
 
 def guided_search(request):
-<<<<<<< HEAD
     if request.method == 'GET':
         return render(request, 'search_by_guidance.html')
     if request.method == 'POST':
@@ -47,45 +46,12 @@ def guided_search(request):
         kindergarten = language_select(p_second, kindergarten)
         print(kindergarten)
         return render(request, 'search_by_guidance.html', {'user_list': kindergarten})
-=======
-	if request.method == 'GET':
-		return render(request, 'search_by_details.html')
-	if request.method == 'POST':
-		p_sg = request.POST.get('citizenship')
-		print(p_sg)
-		p_certificate = request.POST.get('SPARK')
-		print(p_certificate)
-		p_year = request.POST.get('age')
-		print(p_year)
-		p_post = request.POST.get('adr')
-		print(p_post)
-		p_dis = request.POST.get('distance')
-		print(p_dis)
-		p_price = request.POST.get('fee')
-		print(p_price)
-		p_second = request.POST.get('language')
-		print(p_second)
-		kindergarten = Kindergarten.objects.all()
-
-		# k2 = False
-		if p_sg.upper() == 'SINGAPOREAN' or p_sg.upper == 'S':
-			kindergarten = selecetMOE(kindergarten)
-		# if int(p_year) <= 6 or int(p_year) >= 5:
-		# 	k2 = True
-		# kindergarten = year_kindergarten(k2, kindergarten)
-		# if p_certificate.upper() == 'YES' or p_certificate.upper() == 'Y':
-		# 	kindergarten = selecetSPARK(kindergarten)
-		# kindergarten = price_select(str(p_price), kindergarten, k2)
-		# kindergarten = language_select(p_second, kindergarten)
-		# print(kindergarten)
-		# # return render(request, 'search_by_details.html', {'user_list': kindergarten})
-		return render(request, 'search_by_details.html')
 
 def selecetMOE(collection):
 	# target_kind = collection.filter(MOE == True)
 	target_kind = collection.filter(type='MOE')
 	return target_kind
->>>>>>> 317af31165fae2597b1744c6025a3b82a9e89d2d
+
 
 
 def language_select(p_second, collection):
@@ -138,15 +104,11 @@ def price_select(price, collection, k2):
     return target_kind
 
 
-<<<<<<< HEAD
 def selecetMOE(collection):
     # target_kind = collection.filter(MOE == True)
     target_kind = collection.filter(type='MOE')
     return target_kind
 
-
-=======
->>>>>>> 317af31165fae2597b1744c6025a3b82a9e89d2d
 def selecetSPARK(collection):
     target_kind = collection.filter(sparkCer=True)
     return target_kind
