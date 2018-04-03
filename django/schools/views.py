@@ -44,6 +44,7 @@ def guided_search(request):
 		# k2 = False
 		if p_sg.upper() == 'SINGAPOREAN' or p_sg.upper == 'S':
 			kindergarten = selecetMOE(kindergarten)
+
 		# if int(p_year) <= 6 or int(p_year) >= 5:
 		# 	k2 = True
 		# kindergarten = year_kindergarten(k2, kindergarten)
