@@ -14,7 +14,8 @@ def save_callback(sender, **kwargs):
         #msg.from_id = 1
         msg.save()
         userlist = User.objects.all()
-        notifyUser(User(),userlist,msg)
+        print(userlist)
+        notifyUser(userlist,msg)
     else:
         msg = Message()
         msg.content = "There is an update in the "+kindergarten.name+"!"
