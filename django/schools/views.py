@@ -196,20 +196,6 @@ class SchoolDetailView(View):
         return render(request, 'school_detail.html', context)
 
 
-def saveToList(request, pk):
-    try:
-        user = User.objects.get(username=request.session['member_id'])
-    except:
-        # print('here')
-        return render(request, 'login.html')
-    school = Kindergarten.objects.get(id=pk)
-    if school in user.following.all():
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-    else:
-        user.following.add(school)
-        user.save()
-        # print('ok')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def deleteFromList(request, pk):

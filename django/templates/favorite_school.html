@@ -1,12 +1,5 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Favorite School</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="css/index.css">
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="node_modules/font-awesome-4.7.0/css/font-awesome.min.css">
+{% extends 'base.html' %}
+{% block style %}
 		<style>
 			.modal-header,h6,.close{
 				text-align:center;
@@ -72,43 +65,9 @@
 				left: 0;
 			}
 		</style>
-	</head>
+{% endblock %}
 
-	<body>
-		<!-- Navbar -->
-		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
-			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown" style="padding-right: 15px;">
-						<a class="nav-link dropdown-toggle" href="#" id="search" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
-						</a>
-						<div class="dropdown-menu" aria-labelledby="searchDropdown">
-							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
-							<a class="dropdown-item" href="search_by_details.html">By school details</a>
-						</div>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="myAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o">&nbsp;</i>My account <div class="badge badge-pill badge-warning">3</div>
-						</a>
-						<div class="dropdown-menu" style="right: 0; left: auto" aria-labelledby="myAccountDropdown">
-							<div class="dropdown-header">username@example.com</div>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="user_profile.html"><i class="fa fa-user-circle-o">&nbsp;</i>My profile</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="favorite_shcool.html"><i class="fa fa-heart-o">&nbsp;</i>Favorite schools</a>
-							<a class="dropdown-item" href="notificaiton.html"><i class="fa fa-bell-o">&nbsp;</i>Notifications &nbsp;<div class="badge badge-pill badge-warning" style="float: right">3</div></a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
-						</div>	
-					</li>
-				</ul>
-			</div>
-		</nav>
-		
+{% block favscl %}
 		<!-- Body -->
 		<div class="container-fluid" style="height: 100%">
 			<div class="card main-card">
@@ -253,14 +212,9 @@
 				</div>
 			</div>
 		</div>
-	<!-- Copyright -->
-		<div class="footer-copyright py-3 text-center">
-			&copy; 2018 TEAM UNDEFINED
-		</div>
-		<!-- JS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
-		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		
+{% endblock %}
+
+        {% block js %}
 		<script>
 			function fav-toggle(){
 				var btn = document.getElementById("fav-btn");
@@ -274,5 +228,4 @@
 				}
 			}
 		</script>
-</body>
-</html>
+        {% endblock %}
