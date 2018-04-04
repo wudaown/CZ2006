@@ -110,8 +110,11 @@ class GuideSearch(View):
 		query = query.replace("school", str(zip_school))
 		with urllib.request.urlopen(query) as url:
 			data = json.loads(url.read().decode())
-			dist = data['routes'][0]['legs'][0]['distance']['value']
-			return dist
+			if data['status'] == 'ZERO_RESULTS':
+				return -1
+			else:
+				dist = data['routes'][0]['legs'][0]['distance']['value']/1000
+				return dist
 			
 # def guided_search(request):
 # 	if request.method == 'GET':
