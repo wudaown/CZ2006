@@ -1,38 +1,372 @@
 {% extends 'base.html' %}
 {% block style %}
-    <style>
-        .modal-header, h6, .close {
-            background-color: #ca1632;
-            color: white !important;
-            text-align: center;
-            font-size: 30px;
-        }
-
-        .modal-footer {
-            background-color: #f9f9f9;
-        }
-
-        .footer-copyright {
-            color: white;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background-color: #979797;
-        }
-    </style>
+		<style>
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 24px;
+			}
+			.header{
+				background: linear-gradient(to bottom right, rgba(0,47,75,0.6), rgba(220,66,37,0.6)), url("2.jpg");
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				padding: 20vh 0 5vh 0;
+			}
+			h1{
+				font-weight: normal;
+				color: white;
+				letter-spacing: 2px;
+			}
+			.card-collapse{
+				width: 100%;
+				border:hidden;
+			}
+			.card-collapse .card-body{
+				width: 100%;
+				padding: 0;
+			}
+			.card-collapse table{
+				width: 100%;
+				margin-bottom: 1.25rem;
+				text-align: center;
+			}
+			.card-collapse table thead{
+				text-align: center;
+				color: #CA1632;
+				background-color: #F8F8F8;
+			}
+			.btn-collapse{
+				margin: 1.25rem 0;
+				width: inherit;
+				text-align: left;
+			}
+			
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
 {% endblock %}
-{% block kindergartenDetail %}
-    <ul class="list-group">
-        <li class="list-group-item">{{ school.name }}</li>
-        <li class="list-group-item">{{ school.postalcode }}</li>
-        <li class="list-group-item">{{ school.isoperation }}</li>
-        <li class="list-group-item">{{ school.address }}</li>
-        <li class="list-group-item">{{ school.email }}</li>
-        <li class="list-group-item">{{ school.website }}</li>
-        <li class="list-group-item">{{ school.number }}</li>
-    <!--
-    more to be added
-    -->
-    </ul>
-{% endblock %}
 
+{% block body %}
+		<!-- Body -->
+		<div class="container-fluid">
+			<!-- Header -->
+			<div class="row header">
+				<div class="container">
+					<div class="row">
+						<h1>{{ school.name }}</h1>
+					</div>
+					<div class="row">
+						<button type="button" class="btn btn-success m-1"><i class="fa fa-share">&nbsp;</i>Apply to this school</button>
+{#						<button type="button" class="btn btn-danger m-1"><i class="fa fa-heart">&nbsp;</i>Add to favorite list</button>#}
+                        <a href="{% url 'toggle-fav' school.pk %}" class="btn btn-danger m-1"><i class="fa fa-heart"></i>Add to favorite list</a>
+						<button type="button" class="btn btn-primary m-1"><i class="fa fa-plus">&nbsp;</i>Add to compare</button>
+					</div>
+				</div>
+				
+			</div>
+			<!-- Map & Main infor -->
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<!-- GOOGLE MAP-->
+						<div class="col-6" style="background-color: grey">
+							<div class="container" style="color: white; height: 100%; width: 100%; padding: 30% 5%">
+								<h5 style="margin: auto">This area is reserved for google map to show the location of the school.</h5>
+							</div>		
+						</div>
+						<!-- Main infor -->
+						<div class="col-6">
+							<table id="basic-info" class="table">
+								<tr>
+									<th>Opeartion Status</th>
+									<td>{{ school.isoperation }}</td>
+								</tr>
+								<tr>
+									<th>Kindergarten Type</th>
+									<td>{{ school.type }}</td>
+								</tr>								
+								<tr>
+									<th>Email</th>
+									<td><a href="{{ school.email }}">{{ school.email }}</a></td>
+								</tr>
+								<tr>
+									<th>Website</th>
+                                    {% if school.website != 'NULL' %}
+									<td><a href="{{ school.website }}">{{ school.website }}</a></td>
+                                    {% else %}
+                                    <td>No Available Yet</td>
+                                    {% endif %}
+								</tr>
+								<tr>
+									<th>Bus Service</th>
+                                    {% if school.bus == True %}
+									<td>Yes</td>
+                                    {% else %}
+                                    <td>No</td>
+                                    {% endif %}
+								</tr>
+								<tr>
+									<th>SPART Certified</th>
+                                    {% if school.sparkCer == True %}
+									<td>Yes</td>
+                                    {% else %}
+                                    <td>No</td>
+                                    {% endif %}
+								</tr>
+																<tr>
+									<th>Address</th>
+									<td>{{ school.address }}<br><br>{{ school.postalcode }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- School programme collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#programme-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;School Programmes with Session Time</button>
+							</div>
+							<div class="collapse" id="programme-table">
+								<div class="card-body">
+								<table class="table-sm table-light">
+									<tr>
+										<th></th>
+										<th>START</th>
+										<th>END</th>
+									</tr>
+									<tr>
+										<th class="text-left">Academic Year</th>
+										<td>1/4/2017</td>
+										<td>11/17/2017</td>
+									</tr>
+									<tr>
+										<th class="text-left">Opeartin Hour</th>
+										<td>NULL</td>
+										<td>NULL</td>
+									</tr>
+								</table>
+								<table class="table table-bordered table-sm" id="k2-table">
+									<thead><th colspan="3">Kindergarten Two Programme (Age 6+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="k1-table">
+									<thead><th colspan="3">Kindergarten One Programme (Age 5+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="nursey-table">
+									<thead><th colspan="3">Nursery Programme (Age 4+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Session 4</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="playgroup-table">
+									<thead><th colspan="3">Playgroup Programme (Age 18m ~ 2+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Session 4</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							</div>
+								
+						</div>
+					</div>
+					<!-- Language programme collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#language-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;Language Programmes</button>
+							</div>
+							<div class="collapse" id="language-table">
+								<div class="card-body">
+								<table class="table-light table-sm">
+									<tr>
+                                        <th class="text-left">Secondary Languages</th>
+{#                                        <td>Chinese</td>#}
+{#                                        <td>Tamil</td>#}
+{#                                        <td>Hindi</td>#}
+{#                                        <td>Malay</td>#}
+{#                                        <td>Arabic</td>#}
+                                        {% for l in lang %}
+										<th>{{ l }}</th>
+                                        {% endfor %}
+									</tr>
+{#									<tr>#}
+{#										<th class="text-left">Secondary Languages</th>#}
+{#										<td><i class="fa fa-times"></i></td>#}
+{#										<td><i class="fa fa-check"></i></td>#}
+{#										<td><i class="fa fa-times"></i></td>#}
+{#									</tr>#}
+                                <!--
+									<tr>
+										<th class="text-left">Other Languages</th>
+										<td>Arabic</td>
+									</tr>
+									-->
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+					<!-- Fee collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#fee-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;Fees</button>
+							</div>
+							<div class="collapse" id="fee-table">
+								<div class="card-body">
+								<table class="table-light table-sm">
+									<tr>
+										<th></th>
+										<th>CURRENT</th>
+										<th>NEW</th>
+									</tr>
+									<tr>
+										<th class="text-left">Rgistration</th>
+										<td>{{ school.registrationfee }}</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Kindergarten Two</th>
+										<td>{{ school.k2fee }}</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Kindergarten One</th>
+										<td>{{ school.k1fee }}</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Nursery</th>
+										<td>{{ school.nurseryfee }}</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Pre-Nursery</th>
+										<td>{{ school.prenurseryfee }}</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Playgroup</th>
+										<td>{{ school.playgroupfee }}</td>
+										<td>NULL</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
