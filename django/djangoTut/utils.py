@@ -5,6 +5,7 @@ from djangoTut.settings import EMAIL_HOST_USER
 from requests_html import HTMLSession
 import random
 import string
+import re
 
 from users.models import EmailVerifyRecord
 
@@ -66,6 +67,15 @@ def load_schools(filePath):
 		pass
 	
 	
+def resub(s):
+	# s = int(re.sub('[^0-9a-zA-Z]+', '*', s))
+	if s != 'N.A.' and s != 'N.A' and s != 'NA' and s != 'Nil' and s != 'N.A..':
+		return int(round(float((''.join(ele for ele in s if ele.isdigit() or ele == '.')))))
+		# s = re.findall("\d+", s)[0]
+		# s = int(re.sub('[^0-9]', '', s))
+	else:
+		return 0
+
 def crawler():
 	session = HTMLSession()
 	baseurl = 'https://www.msf.gov.sg/dfcs/kindergarten/view.aspx?id='
@@ -138,12 +148,18 @@ def crawler():
 			kinder.sparkCer = False
 			kinder.sparkvalidity = 'NULL'
 		a = r.html.find('table.tb_fees')[0].find('td')[1::3]
-		kinder.registrationfee = a[0].text
-		kinder.k2fee = a[1].text
-		kinder.k1fee = a[2].text
-		kinder.nurseryfee = a[3].text
-		kinder.prenurseryfee = a[4].text
-		kinder.playgroupfee = a[5].text
+		print(a[0].text)
+		kinder.registrationfee = resub(a[0].text)
+		print(a[1].text)
+		kinder.k2fee = resub(a[1].text)
+		print(a[2].text)
+		kinder.k1fee = resub(a[2].text)
+		print(a[3].text)
+		kinder.nurseryfee = resub(a[3].text)
+		print(a[4].text)
+		kinder.prenurseryfee = resub(a[4].text)
+		print(a[5].text)
+		kinder.playgroupfee = resub(a[5].text)
 		a = r.html.find('tr', containing='Second')[0].find('td')[1]
 		b = a.text.split('\n')
 		for i in b:
