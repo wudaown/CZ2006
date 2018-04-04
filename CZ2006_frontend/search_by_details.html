@@ -33,8 +33,21 @@
 				color: white;
 			}
 			.search-container{
-				background-color: #F8F8F8;
+				background-color: white;
 				border-radius: 0.25rem;
+			}
+			.search-container form{
+				width: 100%;
+				margin: 0;
+			}
+			.search-container form table th{
+				padding-left: 1.25rem;
+			}
+			.search-container form table td{
+				padding-left: 1.25rem;
+			}
+			.search-container form table th{
+				background-color: #EBEBEB;
 			}
 			.my-box{
 				width: 50px; 
@@ -155,134 +168,136 @@
 			<!-- Header -->
 			<div class="row header">
 				<div class="container">
-				<!-- search panel inside header -->
-				<h1>Search by details</h1>
-				<div class="container search-container">
-					<form method="post">
-						<table class="table my-0 table-sm" id="search-input" style="widows: 100%;">
-							<tr>
-								<th>Type</th>
-								<td>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="type1" value="commercial" id="type-commercial">
-										<label class="form-check-label" for="type-commercial">Commercial</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="type2" value="MOE" id="type-MOE">
-										<label class="form-check-label" for="type-MOE">MOE</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="type3" value="AOP" id="type-AOP">
-										<label class="form-check-label" for="type-AOP">AOP</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="type4" value="POP" id="type-POP">
-										<label class="form-check-label" for="type-POP">POP</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="type5" value="NOP" id="type-NOP">
-										<label class="form-check-label" for="type-NOP">Not for profit</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Programmes</th>
-								<td>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="programme1" value="k1" id="programme-k1">
-										<label class="form-check-label" for="commercial">K1</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="programme2" value="k2" id="programme-k2">
-										<label class="form-check-label" for="programme-k2">K2</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="programme3" value="nursey" id="programme-nursey">
-										<label class="form-check-label" for="programme-nursey">Nursey</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="programme2" value="playground" id="programme-playground">
-										<label class="form-check-label" for="programme-playground">Playground</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Languages</th>
-								<td>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="language1" value="chinese" id="language-chinese">
-										<label class="form-check-label" for="language-chinese">Chinese</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="language2" value="Malay" id="language-malay">
-										<label class="form-check-label" for="language-malay">Malay</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="language3" value="Tamil" id="language-tamil">
-										<label class="form-check-label" for="language-tamil">Tamil</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="language4" value="others" id="language-other">
-										<label class="form-check-label" for="language-other">Others</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Distance (km)</th>
-								<td>
-									<div class="form-group d-inline">
-										<span>Range:</span>
-										<input class="my-box" type="text" name="min-dis" value="0" id="min-dis">
-										<span>-</span>
-										<input class="my-box" type="text" name="max-dis" value="100" id="max-dis">
-									</div>
-									<div class="form-group d-inline mx-4">
-										<span>Your psotal code:</span>
-										<input class="my-box" type="text" name="zip" value="000000" id="zip" style="width: 80px">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Fees (SGD)</th>
-								<td>
-									<div class="form-group d-inline">
-										<span>Range:</span>
-										<input class="my-box" type="text" name="min-fee" value="0" id="min-fee">
-										<span>-</span>
-										<input class="my-box" type="text" name="max-fee" value="1000" id="max-fee">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Others</th>
-								<td>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="other1" value="SPARK" id="other-SPARK">
-										<label class="form-check-label" for="other-SPARK">SPARK certified</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="other2" value="bus" id="other-bus">
-										<label class="form-check-label" for="other-bus">Bus services</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" name="other3" value="outdoor" id="other-outdoor">
-										<label class="form-check-label" for="other-outdoor">Provision of outdoor playground</label>
-									</div>
-								</td>
-							</tr>
-						</table>
-						<div class="text-center"><button type="submit" class="btn btn-danger my-3"><i class="fa fa-filter">&nbsp;</i> Apply filter</button></div>
-					</form>
+					<!-- search panel inside header -->
+					<h1>Search by details</h1>
+					<div class="search-container">
+						<form method="post">
+							<table class="table my-0" id="search-input" style="widows: 100%;">
+								<tr>
+									<th>Type</th>
+									<td>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="type1" value="commercial" id="type-commercial">
+											<label class="form-check-label" for="type-commercial">Commercial</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="type2" value="MOE" id="type-MOE">
+											<label class="form-check-label" for="type-MOE">MOE</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="type3" value="AOP" id="type-AOP">
+											<label class="form-check-label" for="type-AOP">AOP</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="type4" value="POP" id="type-POP">
+											<label class="form-check-label" for="type-POP">POP</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="type5" value="NOP" id="type-NOP">
+											<label class="form-check-label" for="type-NOP">Not for profit</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>Programmes</th>
+									<td>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="programme1" value="k1" id="programme-k1">
+											<label class="form-check-label" for="commercial">K1</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="programme2" value="k2" id="programme-k2">
+											<label class="form-check-label" for="programme-k2">K2</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="programme3" value="nursey" id="programme-nursey">
+											<label class="form-check-label" for="programme-nursey">Nursey</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="programme2" value="playground" id="programme-playground">
+											<label class="form-check-label" for="programme-playground">Playground</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>Languages</th>
+									<td>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="language1" value="chinese" id="language-chinese">
+											<label class="form-check-label" for="language-chinese">Chinese</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="language2" value="Malay" id="language-malay">
+											<label class="form-check-label" for="language-malay">Malay</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="language3" value="Tamil" id="language-tamil">
+											<label class="form-check-label" for="language-tamil">Tamil</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="language4" value="others" id="language-other">
+											<label class="form-check-label" for="language-other">Others</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>Distance (km)</th>
+									<td>
+										<div class="container">
+											<div class="row">
+												<div class="col-md-6 px-0">
+													<span>Range:</span>
+													<input class="my-box" type="text" name="min-dis" value="0" id="min-dis">
+													<span>-</span>
+													<input class="my-box" type="text" name="max-dis" value="100" id="max-dis">
+												</div>
+												<div class="col-md-6 px-0">
+													<span>Your psotal code:</span>
+													<input class="my-box" type="text" name="zip" value="000000" id="zip" style="width: 80px">
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>Fees (SGD)</th>
+									<td>
+										<div class="form-group d-inline">
+											<span>Range:</span>
+											<input class="my-box" type="text" name="min-fee" value="0" id="min-fee">
+											<span>-</span>
+											<input class="my-box" type="text" name="max-fee" value="1000" id="max-fee">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>Others</th>
+									<td>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="other1" value="SPARK" id="other-SPARK">
+											<label class="form-check-label" for="other-SPARK">SPARK certified</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="other2" value="bus" id="other-bus">
+											<label class="form-check-label" for="other-bus">Bus services</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="checkbox" name="other3" value="outdoor" id="other-outdoor">
+											<label class="form-check-label" for="other-outdoor">Provision of outdoor playground</label>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="text-center"><button type="submit" class="btn btn-danger my-3"><i class="fa fa-filter">&nbsp;</i> Apply filter</button></div>
 				</div>
-				</div>
-				
 			</div>
 			
 			<!-- Search result list -->
 			<!-- initially show all the schools, until apply filter -->
 			<div class="row main-row">
 				<div class="container sch-container">
-					<p class="text-center">Click on school names for more information.</p>
 					<div class="row sch-row">
 						<div class="sch-card">
 							<table class="table table-bordered table-sm">
