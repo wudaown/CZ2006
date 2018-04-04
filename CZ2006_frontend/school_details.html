@@ -1,10 +1,458 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>School Name</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>School name</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 24px;
+			}
+			.main-row{
+				margin: auto;
+				padding: 1rem 0;
+			}
+			.sch-row{
+				margin: auto;	
+				padding: 1rem 0 0 0;
+			}
+			.header{
+				background: linear-gradient(to bottom right, rgba(0,47,75,0.6), rgba(220,66,37,0.6)), url("2.jpg");
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				padding: 20vh 0 5vh 0;
+			}
+			h1{
+				font-weight: normal;
+				color: white;
+				letter-spacing: 2px;
+			}
+			.card-collapse{
+				width: 100%;
+				border:hidden;
+			}
+			.card-collapse .card-body{
+				width: 100%;
+				padding: 0;
+			}
+			.card-collapse table{
+				width: 100%;
+				margin-bottom: 1.25rem;
+				text-align: center;
+			}
+			.card-collapse table thead{
+				text-align: center;
+				color: #CA1632;
+				background-color: #F8F8F8;
+			}
+			.btn-collapse{
+				margin: 1.25rem 0;
+				width: inherit;
+				text-align: left;
+			}
+			
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
 
-<body>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown" style="padding-right: 15px;">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+							<a class="dropdown-item" href="search_by_details.html">By school details</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<button type="button" class="btn btn-link px-0 nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-circle-o">&nbsp;</i>Login / Registration</button>	
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- Login & Registration Modal -->
+		<div class="modal fade" id="loginModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 20px;">
+						<h6>Login / Registration</h6>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" style="padding: 30px 40px;">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs">
+							<li class="nav-item"><a class="nav-link active" href="#Login" data-toggle="tab">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="#Registration" data-toggle="tab">Registration</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<!-- Login pane -->
+							<div class="tab-pane active" id="Login" style="margin: auto">
+								<form role="form">
+									<div class="form-group">
+										<lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+										<input type="text" class="form-control" id="usrname" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+										<input type="text" class="form-control" id="psw" placeholder="Enter password">
+									</div>
+									<div class="custom-checkbox">
+										<label><input type="checkbox" value="" checked>&nbsp;Remember me</label>
+									</div>
+									<button type="submit" class="btn btn-success btn-block">Login</button>
+									<div style="display: inline"><a href="#">Forgot your password?</a></div>
+								</form>
+							</div>
+							<!-- Registration pane -->
+							<div class="tab-pane" id="Registration">
+								<form role="form">
+									<div class="form-group">
+										<lable for="usrname"><i class="fa fa-user"></i>&nbsp;Username</lable>
+										<input type="text" class="form-control" id="reg-usrname" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><i class="fa fa-unlock-alt"></i>&nbsp;Password</label>
+										<input type="text" class="form-control" id="reg-psw" placeholder="Enter password">
+									</div>
+									<div class="form-group">
+										<label for="confirm-psw"><i class="fa fa-eye"></i>&nbsp;Confirm Password</label>
+										<input type="text" class="form-control" id="reg-psw-confirm" placeholder="Enter password again">
+									</div>
+									<button type="submit" class="btn btn-info btn-block">Sign up</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Body -->
+		<div class="container-fluid">
+			<!-- Header -->
+			<div class="row header">
+				<div class="container">
+					<div class="row">
+						<h1>Al-Nasry @ Jurong West Kindergarten</h1>
+					</div>
+					<div class="row">
+						<button type="button" class="btn btn-success m-1"><i class="fa fa-share">&nbsp;</i>Apply to this school</button>
+						<button type="button" class="btn btn-danger m-1"><i class="fa fa-heart">&nbsp;</i>Add to favorite list</button>
+						<button type="button" class="btn btn-primary m-1"><i class="fa fa-plus">&nbsp;</i>Add to compare</button>
+					</div>
+				</div>
+				
+			</div>
+			<!-- Map & Main infor -->
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<!-- GOOGLE MAP-->
+						<div class="col-6" style="background-color: grey">
+							<div class="container" style="color: white; height: 100%; width: 100%; padding: 30% 5%">
+								<h5 style="margin: auto">This area is reserved for google map to show the location of the school.</h5>
+							</div>		
+						</div>
+						<!-- Main infor -->
+						<div class="col-6">
+							<table id="basic-info" class="table">
+								<tr>
+									<th>Opeartion Status</th>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<th>Kindergarten Type</th>
+									<td>Commertcial</td>
+								</tr>								
+								<tr>
+									<th>Email</th>
+									<td><a href="alnasryjw@gmail.com">alnasryjw@gmail.com</a></td>
+								</tr>
+								<tr>
+									<th>Website</th>
+									<td><a href="www.alnasry.edu.sg">www.alnasry.edu.sg</a></td>
+								</tr>
+								<tr>
+									<th>Bus Service</th>
+									<td>Yes</td>
+								</tr>
+								<tr>
+									<th>SPART Certified</th>
+									<td>No</td>
+								</tr>
+																<tr>
+									<th>Address</th>
+									<td>743 Jurong West Street<br>73 #B1-03<br>Singapore 640743</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- School programme collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#programme-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;School Programmes with Session Time</button>
+							</div>
+							<div class="collapse" id="programme-table">
+								<div class="card-body">
+								<table class="table-sm table-light">
+									<tr>
+										<th></th>
+										<th>START</th>
+										<th>END</th>
+									</tr>
+									<tr>
+										<th class="text-left">Academic Year</th>
+										<td>1/4/2017</td>
+										<td>11/17/2017</td>
+									</tr>
+									<tr>
+										<th class="text-left">Opeartin Hour</th>
+										<td>NULL</td>
+										<td>NULL</td>
+									</tr>
+								</table>
+								<table class="table table-bordered table-sm" id="k2-table">
+									<thead><th colspan="3">Kindergarten Two Programme (Age 6+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="k1-table">
+									<thead><th colspan="3">Kindergarten One Programme (Age 5+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="nursey-table">
+									<thead><th colspan="3">Nursery Programme (Age 4+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Session 4</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-sm" id="playgroup-table">
+									<thead><th colspan="3">Playgroup Programme (Age 18m ~ 2+)</th></thead>
+									<tbody>
+										<tr>
+											<th>Session 1</th>
+											<td>8:00</td>
+											<td>11:00</td>
+										</tr>
+										<tr>
+											<th>Session 2</th>
+											<td>11:00</td>
+											<td>14:00</td>
+										</tr>
+										<tr>
+											<th>Session 3</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Session 4</th>
+											<td>N.A.</td>
+											<td>N.A.</td>
+										</tr>
+										<tr>
+											<th>Vacancy</th>
+											<td colspan="2">NULL</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							</div>
+								
+						</div>
+					</div>
+					<!-- Language programme collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#language-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;Language Programmes</button>
+							</div>
+							<div class="collapse" id="language-table">
+								<div class="card-body">
+								<table class="table-light table-sm">
+									<tr>
+										<th></th>
+										<th>Chinese</th>
+										<th>Malay</th>
+										<th>Tamil</th>
+									</tr>
+									<tr>
+										<th class="text-left">Secondary Languages</th>
+										<td><i class="fa fa-times"></i></td>
+										<td><i class="fa fa-check"></i></td>
+										<td><i class="fa fa-times"></i></td>
+									</tr>
+									<tr>
+										<th class="text-left">Other Languages</th>
+										<td>Arabic</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+					<!-- Fee collapse -->
+					<div class="row">
+						<div class="card card-collapse">
+							<div class="card-body">
+								<button type="button" class="btn btn-danger btn-collapse" data-toggle="collapse" data-target="#fee-table"><i class="fa fa-plus">&nbsp;</i>&nbsp;Fees</button>
+							</div>
+							<div class="collapse" id="fee-table">
+								<div class="card-body">
+								<table class="table-light table-sm">
+									<tr>
+										<th></th>
+										<th>CURRENT</th>
+										<th>NEW</th>
+									</tr>
+									<tr>
+										<th class="text-left">Rgistration</th>
+										<td>$50</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Kindergarten Two</th>
+										<td>$170</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Kindergarten One</th>
+										<td>$170</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Nursery</th>
+										<td>$170</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Pre-Nursery</th>
+										<td>$170</td>
+										<td>NULL</td>
+									</tr>
+									<tr>
+										<th class="text-left">Playgroup</th>
+										<td>N.A.</td>
+										<td>NULL</td>
+									</tr>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			&copy; 2018 TEAM UNDEFINED
+		</div>
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
