@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import View
-from .models import Kindergarten
-from users.models import User
+from .models import Kindergarten, Language
 from django.http import Http404
 # Create your views here.
 
@@ -25,52 +24,85 @@ def advanced_search(request):
 # need to consult UI to finalise form
 class GuideSearch(View):
 	def get(self, request):
-		return render(request, 'search_by_details_edit.html')
+		return render(request, 'search_by_details.html')
 	
 	def post(self, request):
 		all_k = Kindergarten.objects.all()
+		all_lang = Language.objects.all()
+		type_k = []
+		type_list = []
+		# TODO
+		# html my-box class value attribute color
+		min_fee = int(request.POST.get('min-fee'))
+		max_fee = int(request.POST.get('max-fee'))
+		min_dis = int(request.POST.get('min-dis'))
+		max_dis = int(request.POST.get('max-dis'))
+		type_k.append(request.POST.get('commercial'))
+		type_k.append(request.POST.get('moe'))
+		type_k.append(request.POST.get('aop'))
+		type_k.append(request.POST.get('pop'))
+		type_k.append(request.POST.get('nfp'))
+		grade = request.POST.get('programme')
+		zip = int(request.POST.get('zip'))
+		spark = bool(request.POST.get('spark'))
+		bus = bool(request.POST.get('bus'))
+		outdoor = bool(request.POST.get('outdoor'))
 		
-		grade = int(request.POST['age'])
-		fee = int(request.POST['fee'])
+		lang_k = []
+		lang_list = []
+		lang_k.append(request.POST.get('language1'))
+		lang_k.append(request.POST.get('language2'))
+		lang_k.append(request.POST.get('language3'))
+		lang_k.append(request.POST.get('language4'))
+		lang_k.append(request.POST.get('language5'))
 		
-		# selection of spark
-		all_k = all_k.filter(sparkCer=bool(request.POST['SPARK']))
-		
-		# selection of grade and fee
-		if 5 <= grade <= 6:
-			# TODO
-			# gte for testing only
-			all_k = all_k.filter(k2_capacity__gte=0)
-			all_k = all_k.filter(k2fee__range=(fee-25, fee+25))
-		else:
+		if grade == 'k1':
 			all_k = all_k.filter(k1_capacity__gte=0)
-			all_k = all_k.filter(k1fee__range=(fee-25, fee+25))
+			all_k = all_k.filter(k1fee__range=(min_fee, max_fee))
+		elif grade == 'k2':
+			all_k = all_k.filter(k2_capacity__gte=0)
+			all_k = all_k.filter(k1fee__range=(min_fee, max_fee))
+			
 		
-		# selection of type
-		k1 = all_k.filter(type__icontains=request.POST['type1'])
-		k2 = all_k.filter(type__icontains=request.POST['type2'])
-		all_k = k1.union(k2)
-	
-		context = {'kindergarten': all_k}
-		return render(request, 'search_by_details_edit.html', context)
-
-	def language_select(self, p_second, collection):
-		target_kind = []
-		if p_second == 'cn':
-			for i in collection:
-				if 'Chinese' in [str(j) for j in i.language.all()]:
-					target_kind.append(i)
-		elif p_second == 'my':
-			for i in collection:
-				if 'Malay' in [str(j) for j in i.language.all()]:
-					target_kind.append(i)
-		elif p_second == 'tm':
-			for i in collection:
-				if 'Tamil' in [str(j) for j in i.language.all()]:
-					target_kind.append(i)
+		if spark:
+			all_k = all_k.filter(sparkCer=bool(request.POST.get('spark')))
+		if bus:
+			all_k = all_k.filter(bus=bool(request.POST.get('bus')))
+		if outdoor:
+			all_k = all_k.filter(outdoor=bool(request.POST.get('outdoor')))
+		
+		for i in type_k:
+			if i is not None:
+				type_list.append(all_k.filter(type__icontains=i))
+		if not all(i is None for i in type_k):
+			all_k = Kindergarten.objects.none()
+		
+		for x in type_list:
+			all_k = all_k.union(x)
+			
+		for i in range(len(lang_k)):
+			if lang_k[i] is not None:
+				lang_list.append(all_k.filter(language=all_lang[i]))
+		if not all(i is None for i in lang_k):
+			all_k = Kindergarten.objects.none()
+		for x in lang_list:
+			all_k = all_k.union(x)
+		
+		final_set = []
+		if max_dis >= 9999:
+			context = {'kindergarten': all_k}
 		else:
-			target_kind = collection
-		return target_kind
+			for i in all_k:
+				dist = self.calculatedistance(zip, i.postalcode)
+				if min_dis <= dist <= max_dis:
+					final_set.append(i)
+			context = {'kindergarten': final_set}
+		
+		# TODO
+		# pagination to be done
+		# print()
+		return render(request, 'search_by_details.html', context)
+
 	
 	def calculatedistance(self, zip_home, zip_school):
 		query = "https://maps.googleapis.com/maps/api/directions/json?origin=home&destination=school&region=sg&key=AIzaSyALTRUtyRv0xcAxEj1mJklVHHXnU77OVE4"
@@ -297,6 +329,23 @@ def fuzzy_filter(user_input, collection):
 			suggestions.append(item)
 	return suggestions
 
+# def language_select(self, p_second, collection):
+# 	target_kind = []
+# 	if p_second == 'cn':
+# 		for i in collection:
+# 			if 'Chinese' in [str(j) for j in i.language.all()]:
+# 				target_kind.append(i)
+# 	elif p_second == 'my':
+# 		for i in collection:
+# 			if 'Malay' in [str(j) for j in i.language.all()]:
+# 				target_kind.append(i)
+# 	elif p_second == 'tm':
+# 		for i in collection:
+# 			if 'Tamil' in [str(j) for j in i.language.all()]:
+# 				target_kind.append(i)
+# 	else:
+# 		target_kind = collection
+# 	return target_kind
 
 # class SchoolListView(View):
 # 	def get(self, request):
@@ -339,8 +388,11 @@ class ToggleFav(View):
 	def get(self, request, pk):
 		try:
 			user = request.user
+			if user.is_anonymous:
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 		except:
-			return render(request, 'login.html')
+				# return render(request, 'index.html')
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 		school = Kindergarten.objects.get(id=pk)
 		if school in user.following.all():
 			user.following.remove(school)
