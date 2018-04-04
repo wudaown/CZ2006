@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>School Application</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.modal-header,h6,.close{
+				background-color: #ca1632;
+				color: white !important;
+				text-align:center;
+				font-size: 24px;
+			}
+			.header
+			{
+				background: linear-gradient(to bottom right, rgba(0,47,75,0.6), rgba(220,66,37,0.6)), url("4.jpg");
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				padding: 20vh 0 5vh 0;
+			}
+			h1{
+				font-weight: normal;
+				color: white;
+				letter-spacing: 2px;
+			}
+			.application-form{
+				border-color:
+			}
+			.school-title-row{
+				margin: 1.25rem 0;
+			}
+			.school-info-row{
+				background-color: #F8F8F8;
+			}
+			html {
+				  height: 100%;
+				  box-sizing: border-box;
+			}
+			*,
+			*:before,
+			*:after {
+			  box-sizing: inherit;
+			}
+			body {
+			  position: relative;
+			  margin: 0;
+			  padding-bottom: 6rem;
+			  min-height: 100%;
+			}
+			.footer-copyright{
+				color:white;
+				width: 100%;
+				background-color: #979797;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #CA1632">
+			<a class="navbar-brand" href="index.html">SchoolFinder.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown" style="padding-right: 15px;">
+						<a class="nav-link dropdown-toggle" href="#" id="search" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search">&nbsp;</i>Search
+						</a>
+						<div class="dropdown-menu" aria-labelledby="searchDropdown">
+							<a class="dropdown-item" href="search_by_guidance.html">By guidance</a>
+							<a class="dropdown-item" href="search_by_details.html">By school details</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="myAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o">&nbsp;</i>My account <div class="badge badge-pill badge-warning">3</div>
+						</a>
+						<div class="dropdown-menu" style="right: 0; left: auto" aria-labelledby="myAccountDropdown">
+							<div class="dropdown-header">username@example.com</div>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="user_profile.html"><i class="fa fa-user-circle-o">&nbsp;</i>My profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="favorite_shcool.html"><i class="fa fa-heart-o">&nbsp;</i>Favorite schools</a>
+							<a class="dropdown-item" href="notificaiton.html"><i class="fa fa-bell-o">&nbsp;</i>Notifications &nbsp;<div class="badge badge-pill badge-warning" style="float: right">3</div></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#"><i class="fa fa-sign-out">&nbsp;</i>Sign out</a>
+						</div>	
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		
+		<!--  Body -->
+		<div class="container-fluid">
+			<!-- Header -->
+			<div class="row header">
+				<div class="container">
+					<div class="row">
+						<h1>Apply</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<div class="row school-title-row">
+							<h2>Al-Nasry @ Jurong West Kindergarten</h2>
+						</div>
+					</div>
+					<div class="row">
+						<!-- Application form -->
+						<div class="col-lg-7 px-0">
+							<div class="card">
+								<div class="card-header">
+									<h4>Application form</h4>
+								</div>
+								<form class="card-body" method="post">
+									<h5>Contact information:</h5>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Full name</span>
+										</div>
+										<input type="text" class="form-control" name="contactFName" placeholder="First Name" required>
+										<input type="text" class="form-control" name="contactLName" placeholder="Last Name" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">ID number</span>
+										</div>
+										<input type="text" class="form-control" name="contactIDNum" placeholder="A1234567B" required>
+									</div>
+								 	<div class="input-group mb-3">
+										<div class="input-group-prepend">
+										<span class="input-group-text">Contact number</span>
+										</div>
+										<input type="text" class="form-control" name="contactNum" placeholder="12345678" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Email</span>
+										</div>
+										<input type="email" class="form-control" name="email" placeholder="username@example.com" required>
+									</div>
+									<div class="input-group mb-5">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Address</span>
+										</div>
+										<input type="text" class="form-control" name="addr-str" placeholder="Street" required>
+										<input type="text" class="form-control" name="addr-blk" placeholder="Block" required>
+										<input type="text" class="form-control" name="addr-unit" placeholder="Unit" required>
+										<input type="text" class="form-control" name="addr-zip" placeholder="Postal code" required>
+									</div>
+									<h5>Child information:</h5>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Full name</span>
+										</div>
+										<input type="text" class="form-control" name="childFName" placeholder="First Name" required>
+										<input type="text" class="form-control" name="childLName" placeholder="Last Name" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">ID number</span>
+										</div>
+										<input type="text" class="form-control" name="childIDNum" placeholder="A1234567B" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Date of birth</span>
+										</div>
+										<input type="date" class="form-control" name="childBDay" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Programme</span>
+										</div>
+										<select class="custom-select" name="programme">
+											<!-- if certain programme is not available for this school, shall remove the option -->
+											<option value="k2">K2</option>
+											<option value="k1">K1</option>
+											<option value="nursey">Nursey</option>
+											<option value="playgroup">Playgroup</option>
+										</select>
+									</div>
+									<div class="custom-file mb-5">
+										<input type="file" class="custom-file-input" id="customFile">
+										<label class="custom-file-label" for="customFile">Upload ID photo</label>
+									</div>
+									<button type="submit" class="btn btn-primary btn-block">Submit</button>
+									<div style="width: 100%; text-align:center">
+										
+									</div> 
+								</form>
+							</div>
+						</div>
+						<!-- School infor column -->
+						<div class="col-lg-5">
+							<div class="container">
+								<!-- Location on Google map-->
+								<div class="row" style="background-color: grey;">
+									<div class="container" style="color: white; height: 100%; width: 100%; padding: 30% 5%">
+									<h5 style="margin: auto">This area is reserved for google map to show the location of the school.</h5>
+									</div>
+								</div>
+								<!-- School basic info -->
+								<div class="row school-info-row">
+									<table id="basic-info" class="table">
+								<tr>
+									<th>Type</th>
+									<td>Commercial</td>
+								</tr>		
+								<tr>
+									<th>Programmes</th>
+									<td>K2, K1, Nursey, Playgroup</td>
+								</tr>
+								<tr>
+									<th>Email</th>
+									<td><a href="alnasryjw@gmail.com">alnasryjw@gmail.com</a></td>
+								</tr>
+								<tr>
+									<th>Website</th>
+									<td><a href="www.alnasry.edu.sg">www.alnasry.edu.sg</a></td>
+								</tr>
+								<tr>
+									<th>Address</th>
+									<td>743 Jurong West Street<br>73 #B1-03<br>Singapore 640743</td>
+								</tr>
+							</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			&copy; 2018 TEAM UNDEFINED
+		</div>
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	
+	</body>
+</html>
