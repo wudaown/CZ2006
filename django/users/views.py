@@ -212,9 +212,9 @@ class FavSch(View):
 		context = {'fav_list' : fav_list}
 		return render(request, 'favorite_school.html', context)
 	
-	def post(self, request):
-		return render(request, 'favorite_school.html')
-
+# 	def post(self, request):
+# 		return render(request, 'favorite_school.html')
+# 
 
 class Notification(View):
 	def get(self, request):
